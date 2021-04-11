@@ -1,0 +1,12 @@
+{
+  "schema": "schema.graphql",
+  "documents": "**/*.graphql",
+  "extensions": {
+    "strawberryShake": {
+      "name": "DemoClient",
+      "url": "https://localhost:5001",
+      "dependencyInjection": true,
+      "namespace" : "Demo.Graphql"
+    }
+  }
+}

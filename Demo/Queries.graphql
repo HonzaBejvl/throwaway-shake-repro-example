@@ -1,0 +1,10 @@
+query getAll {
+  listings {
+    ...Offer
+  }
+}
+
+fragment Offer on Offer {
+   numberFloat
+   numberInt
+}

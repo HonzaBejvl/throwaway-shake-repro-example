@@ -1,0 +1,19 @@
+schema {
+  query: Query
+  mutation: null
+  subscription: null
+}
+
+type Query {
+  listings: [Offer!]!
+}
+
+# interface Listing{
+#   listingId: ID!
+# }
+
+type Offer{
+  listingId: ID!
+  numberInt: Int
+  numberFloat: Float
+}
