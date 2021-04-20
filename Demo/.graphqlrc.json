@@ -3,10 +3,11 @@
   "documents": "**/*.graphql",
   "extensions": {
     "strawberryShake": {
-      "name": "DemoClient",
-      "url": "https://localhost:5001",
+      "name": "BridgeClient",
+      "url": "https://r69u3amow6.execute-api.eu-central-1.amazonaws.com",
       "dependencyInjection": true,
-      "namespace" : "Demo.Graphql"
+      "namespace" : "Logic.Graphql.Generated",
+      "useSingleFile" : "false"
     }
   }
 }

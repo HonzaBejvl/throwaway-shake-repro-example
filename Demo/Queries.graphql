@@ -1,10 +1,758 @@
-query getAll {
-  listings {
-    ...Offer
+query getFilterCount($filter: ListingFilter!) {
+  listings(filter: $filter) {
+    ...ListingsPayloadCount
+  }
+}
+query getListingCards(
+  $filter: ListingFilter!
+  $sort: ListingSort!
+  $limit: Int!
+  $offset: Int!
+  $currency: Currency!
+) {
+  listings(filter: $filter) {
+    ...ListingsPayloadCard
   }
 }
 
-fragment Offer on Offer {
-   numberFloat
-   numberInt
+query getPoints($filter: ListingFilter!) {
+  points(filter: $filter) {
+    ...Point
+  }
+}
+
+query getDetail($listingId: ID!, $currency: Currency!) {
+  listing(listingId: $listingId) {
+    ...ListingDetail
+  }
+}
+
+query getDetailAdmin($listingId: ID!, $currency: Currency!) {
+  listing(listingId: $listingId) {
+    ...ListingDetailAdmin
+  }
+}
+
+query getSeller($sellerId: ID!) {
+  seller(sellerId: $sellerId) {
+    ...Seller
+  }
+}
+
+query getCard($id: ID!, $currency: Currency!) {
+  listing(listingId: $id) {
+    ...ListingCard
+  }
+}
+
+query GetAllSearchResults($value: String!) {
+  search(value: $value) {
+    ...SearchResult
+  }
+}
+
+query getCurrentViewerSeller {
+  viewer {
+    ...ViewerSeller
+  }
+}
+
+query getCurrentViewerListings($currency: Currency!) {
+  viewer {
+    ...ViewerListings
+  }
+}
+
+fragment ViewerListings on Viewer {
+  sellers {
+    listings {
+      ...ListingCard
+    }
+  }
+}
+
+fragment ViewerSeller on Viewer {
+  sellers {
+    seller {
+      ...Seller
+    }
+  }
+}
+
+fragment ListingsPayloadCard on ListingsPayload {
+  items(sort: $sort, limit: $limit, offset: $offset) {
+    ...ListingCard
+  }
+  count
+}
+
+fragment ListingsPayloadCount on ListingsPayload {
+  count
+}
+
+fragment ListingDetail on Listing {
+  ...OfferDetail
+  ...AuctionDetail
+  ...ProjectDetail
+
+  ...HasListingId
+  ...HasTitle
+  ...HasDescription
+  ...HasSlideshow
+  ...HasPhotos
+  ...HasVideos
+  ...HasFloorPlans
+}
+
+fragment ListingDetailAdmin on Listing {
+  ...OfferDetailAdmin
+  ...AuctionDetailAdmin
+  ...ProjectDetailAdmin
+
+  ...HasListingId
+  ...HasTitle
+  ...HasDescription
+  ...HasSlideshow
+  ...HasPhotos
+  ...HasVideos
+  ...HasFloorPlans
+  ...HasState
+  created
+  published
+  closed
+}
+
+fragment HasState on Listing {
+  state
+}
+
+fragment OfferCard on Offer {
+  price {
+    ...Price
+  }
+  serviceType
+  estate {
+    ...Estate
+  }
+}
+
+fragment AuctionCard on Auction {
+  startingPrice {
+    ...Price
+  }
+  serviceType
+  estate {
+    ...Estate
+  }
+}
+
+fragment Price on Price {
+  value(currency: $currency)
+  originalCurrency
+  period
+  unit
+}
+
+fragment HasDescription on Listing {
+  description
+}
+
+fragment HasSlideshow on Listing {
+  slideshow {
+    ...Slide
+  }
+}
+
+fragment HasPhotos on Listing {
+  photos {
+    ...Photo
+  }
+}
+
+fragment HasVideos on Listing {
+  videos {
+    ...Video
+  }
+}
+
+fragment HasFloorPlans on Listing {
+  floorPlans {
+    ...FloorPlan
+  }
+}
+
+fragment HasTitle on Listing {
+  title
+}
+
+fragment ProjectCard on Project {
+  listingCount
+  listings {
+    ...ProjectListingCard
+  }
+}
+
+fragment OfferDetail on Offer {
+  price {
+    ...Price
+  }
+  serviceType
+  estate {
+    ...Estate
+  }
+  seller {
+    ...Seller
+  }
+}
+
+fragment ProjectDetail on Project {
+  seller {
+    ...Seller
+  }
+  listingCount
+  listings {
+    ...ProjectListingCard
+  }
+}
+
+fragment AuctionDetail on Auction {
+  startingPrice {
+    ...Price
+  }
+  serviceType
+  estate {
+    ...Estate
+  }
+  seller {
+    ...Seller
+  }
+}
+
+fragment OfferDetailAdmin on Offer {
+  price {
+    ...Price
+  }
+  serviceType
+  estate {
+    ...EstateAdmin
+  }
+  seller {
+    ...SellerAdmin
+  }
+}
+
+fragment ProjectDetailAdmin on Project {
+  seller {
+    ...SellerAdmin
+  }
+  listingCount
+  listings {
+    ...ProjectListingCard
+  }
+}
+
+fragment AuctionDetailAdmin on Auction {
+  startingPrice {
+    ...Price
+  }
+  serviceType
+  estate {
+    ...EstateAdmin
+  }
+  seller {
+    ...SellerAdmin
+  }
+}
+
+fragment Estate on Estate {
+  type
+  electricity
+  gas
+  water
+  heating
+  waste
+  road
+  natureProtection
+  connectivity
+  ...HasEstateTypeInfo
+  address {
+    ...AddressListing
+  }
+}
+
+fragment EstateAdmin on Estate {
+  type
+  electricity
+  gas
+  water
+  heating
+  waste
+  road
+  natureProtection
+  connectivity
+  ...HasEstateTypeInfo
+  fullAddress {
+    ...Address
+  }
+}
+
+fragment HasEstateTypeInfo on Estate {
+  typeInfo {
+    ...ApartmentInfo
+    ...LandInfo
+    ...GarageInfo
+    ...HouseInfo
+    ...CommercialInfo
+  }
+}
+
+fragment Broker on Broker {
+  ...HasBrokerInformation
+  company {
+    ...Company
+  }
+}
+
+fragment Office on Office {
+  sellerId
+  name
+  photo {
+    ...Photo
+  }
+  company {
+    ...Company
+  }
+}
+
+fragment Company on Company {
+  ...HasCompanyInformation
+}
+
+fragment BrokerAdmin on Broker {
+  ...HasBrokerInformation
+  company {
+    ...CompanyAdmin
+  }
+  subordinates {
+    ...Subordinate
+  }
+}
+
+fragment OfficeAdmin on Office {
+  sellerId
+  name
+  photo {
+    ...Photo
+  }
+  company {
+    ...CompanyAdmin
+  }
+  subordinates {
+    ...Subordinate
+  }
+}
+
+fragment CompanyAdmin on Company {
+  ...HasCompanyInformation
+  subordinates {
+    ...Subordinate
+  }
+}
+
+fragment HasBrokerInformation on Broker {
+  sellerId
+  name
+  photo {
+    ...Photo
+  }
+}
+
+fragment HasCompanyInformation on Company {
+  name
+  photo {
+    ...Photo
+  }
+  headquarters {
+    ...Address
+  }
+}
+
+fragment Subordinate on SellerStructural {
+  sellerId
+}
+
+fragment Individual on Individual {
+  sellerId
+}
+
+fragment ApartmentInfo on ApartmentInfo {
+  apartmentType: type
+  usableArea
+  material
+  energyEfficiency
+  energyCertificate
+  condition
+  material
+  balconyArea
+  terraceArea
+  loggiaArea
+  cellarArea
+  ceilingHeight
+  poolArea
+  acceptanceYear
+  constructionYear
+  reconstructionYear
+  amenities
+  roomCount
+  floorNumber
+  apartmentNumber
+  placement
+  specialClass
+}
+
+fragment HouseInfo on HouseInfo {
+  houseType: type
+  energyEfficiency
+  energyCertificate
+  condition
+  material
+  placement
+  roomCount
+  ceilingHeight
+  amenities
+  usableArea
+  balconyArea
+  terraceArea
+  ceilingHeight
+  loggiaArea
+  reconstructionYear
+  constructionYear
+  acceptanceYear
+  cellarArea
+  poolArea
+  roomCount
+  landArea
+  placement
+}
+
+fragment CommercialInfo on CommercialInfo {
+  commercialType: type
+  energyEfficiency
+  energyCertificate
+  condition
+  material
+  placement
+  roomCount
+  ceilingHeight
+  amenities
+  usableArea
+  balconyArea
+  ceilingHeight
+  terraceArea
+  loggiaArea
+  cellarArea
+  poolArea
+  constructionYear
+  acceptanceYear
+  reconstructionYear
+  storeArea
+  roomCount
+  officeArea
+  warehouseArea
+  productionArea
+  placement
+}
+
+fragment LandInfo on LandInfo {
+  landlType: type
+  landArea
+}
+
+fragment GarageInfo on GarageInfo {
+  garageType: type
+  usableArea
+}
+
+fragment SlideSingle on SlideSingle {
+  index
+  item {
+    ...Figure
+  }
+}
+
+fragment SlideDouble on SlideDouble {
+  index
+  layout
+  itemOne {
+    ...Figure
+  }
+  itemTwo {
+    ...Figure
+  }
+}
+
+fragment SlideTriple on SlideTriple {
+  index
+  layout
+  itemOne {
+    ...Figure
+  }
+  itemTwo {
+    ...Figure
+  }
+  itemThree {
+    ...Figure
+  }
+}
+
+fragment Figure on Figure {
+  ...Matterport
+  ...Photo
+  ...Video
+}
+
+fragment Matterport on Matterport {
+  url
+}
+
+fragment Photo on Photo {
+  figureId
+  url
+  originalUrl
+  is360
+}
+
+fragment FloorPlan on FloorPlan {
+  figureId
+  url
+}
+
+fragment Video on Video {
+  url
+}
+
+fragment Location on Location {
+  type
+  viewport {
+    ...Viewport
+  }
+  region_name
+  district_name
+  city_name
+  city_part_name
+  street_name
+}
+
+fragment Viewport on Viewport {
+  top_left {
+    ...Gps
+  }
+  bottom_right {
+    ...Gps
+  }
+}
+
+fragment Gps on Gps {
+  lat
+  lng
+}
+
+fragment AddressListing on AddressListing {
+  lat
+  lng
+  cityName
+  streetName
+  ruianCode
+}
+
+fragment Address on Address {
+  lat
+  lng
+  cityName
+  streetName
+  ruianCode
+}
+
+fragment ProjectListingCard on ProjectListing {
+  satisfiesFilter
+  listing {
+    ...HasListingId
+    ...OfferCard
+    ...AuctionCard
+  }
+}
+
+fragment SearchResult on SearchResult {
+  ...Location
+  ...Broker
+}
+
+fragment Seller on Seller {
+  ...Broker
+  ...Individual
+  ...Office
+  ...Company
+}
+
+fragment SellerAdmin on Seller {
+  ...BrokerAdmin
+  ...Individual
+  ...OfficeAdmin
+  ...CompanyAdmin
+}
+
+fragment Slide on Slide {
+  ...SlideSingle
+  ...SlideDouble
+  ...SlideTriple
+}
+
+fragment HasListingId on Listing {
+  listingId
+}
+
+fragment ListingCard on Listing {
+  ...OfferCard
+  ...AuctionCard
+  ...ProjectCard
+
+  ...HasListingId
+  ...HasTitle
+  ...HasSlideshow
+  ...HasPhotos
+}
+
+fragment Point on Point {
+  ...PointProject
+  ...PointSimple
+  gps {
+    ...Gps
+  }
+}
+
+fragment PointProject on PointProject {
+  count
+  listingId
+}
+
+fragment PointSimple on PointSimple {
+  listingId
+}
+
+mutation ListingAddPhoto($listingId: ID!, $photoUrl: Url!) {
+  listingAddPhoto(listingId: $listingId, photoUrl: $photoUrl) {
+    ...ListingAddPhotoPayload
+  }
+}
+
+mutation ListingAddVideo($listingId: ID!, $videoUrl: Url!) {
+  listingAddVideo(listingId: $listingId, videoUrl: $videoUrl) {
+    ...ListingAddVideoPayload
+  }
+}
+
+mutation ListingAddFloorPlan($listingId: ID!, $floorPlanUrl: Url!) {
+  listingAddFloorPlan(listingId: $listingId, floorPlanUrl: $floorPlanUrl) {
+    ...ListingAddFloorPlanPayload
+  }
+}
+
+#mutation ListingRemoveFigure($figureId : ID!, $currency : Currency!) {
+#  listingRemoveFigure(figureId: $figureId){
+#    ... ListingRemoveFigurePayload
+#  }
+#}
+
+#mutation ListingLinearViewAddFigure($figureId : ID!, $position : Int!) {
+#  listingLinearViewAddFigure(figureId: $figureId, position : $position){
+#    ... MoveListingFigurePayload
+#  }
+#}
+#
+#mutation ListingLinearViewMoveFigure($figureId : ID!, $position : Int!) {
+#  listingLinearViewMoveFigure(figureId: $figureId, position : $position){
+#    ... MoveListingFigurePayload
+#  }
+#}
+#
+#mutation ListingLinearViewRemoveFigure($figureId : ID!) {
+#  listingLinearViewRemoveFigure(figureId: $figureId){
+#    ... MoveListingFigurePayload
+#  }
+#}
+
+fragment ListingAddPhotoPayload on ListingAddPhotoPayload {
+  result {
+    ...Photo
+  }
+}
+
+fragment ListingAddFloorPlanPayload on ListingAddFloorPlanPayload {
+  result {
+    ...FloorPlan
+  }
+}
+
+fragment ListingAddVideoPayload on ListingAddVideoPayload {
+  result {
+    ...Video
+  }
+}
+
+#fragment MoveListingFigurePayload on MoveListingFigurePayload{
+#  result{
+#    ... Broker
+#  }
+#}
+
+#fragment ListingRemoveFigurePayload on ListingRemoveFigurePayload{
+#  subject{
+#    ... ListingDetailAdmin
+#  }
+#}
+
+fragment ListingSetStatePayload on ListingSetStatePayload {
+  subject {
+    ...ListingDetailAdmin
+  }
+  oldState
+  newState
+}
+
+fragment ListingAddPayload on ListingAddPayload {
+  result {
+    ...ListingDetailAdmin
+  }
+}
+
+fragment ListingEditPayload on ListingEditPayload {
+  subject {
+    ...ListingDetailAdmin
+  }
+}
+
+mutation ListingAdd($listingInput: ListingInput!, $currency: Currency!) {
+  listingAdd(input: $listingInput) {
+    ...ListingAddPayload
+  }
+}
+
+mutation ListingEdit(
+  $listingId: ID!
+  $listingInput: ListingInput!
+  $currency: Currency!
+) {
+  listingEdit(listingId: $listingId, input: $listingInput) {
+    ...ListingEditPayload
+  }
+}
+
+mutation ListingSetState(
+  $listingId: ID!
+  $state: ListingState!
+  $currency: Currency!
+) {
+  listingSetState(listingId: $listingId, state: $state) {
+    ...ListingSetStatePayload
+  }
 }
