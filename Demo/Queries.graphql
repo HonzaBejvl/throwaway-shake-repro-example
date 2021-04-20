@@ -1,10 +1,18 @@
 query getAll {
   listings {
-    ...Offer
+    ...AllListing
   }
 }
 
+fragment AllListing on Listing{
+  ... Offer
+  ... Auction
+}
+
 fragment Offer on Offer {
-   numberFloat
-   numberInt
+   serviceType
+}
+
+fragment Auction on Auction {
+   serviceType
 }

@@ -5,15 +5,24 @@ schema {
 }
 
 type Query {
-  listings: [Offer!]!
+  listings: [Listing!]!
 }
 
-# interface Listing{
-#   listingId: ID!
-# }
-
-type Offer{
+interface Listing{
   listingId: ID!
-  numberInt: Int
-  numberFloat: Float
+}
+
+type Offer implements Listing{
+  listingId: ID!
+  serviceType: ServiceType!
+}
+
+type Auction implements Listing{
+  listingId: ID!
+  serviceType: ServiceType!
+}
+
+enum ServiceType{
+  OPTION1,
+  OPTION2
 }

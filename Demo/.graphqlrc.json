@@ -6,7 +6,8 @@
       "name": "DemoClient",
       "url": "https://localhost:5001",
       "dependencyInjection": true,
-      "namespace" : "Demo.Graphql"
+      "namespace" : "Demo.Graphql",
+      "useSingleFile" : false
     }
   }
 }
