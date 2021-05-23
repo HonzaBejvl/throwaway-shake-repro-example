@@ -3,8 +3,8 @@
 
 namespace Logic.Graphql.Generated
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
-    public interface IGetDetail_Listing_Listings : IProjectListingCard
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
+    public interface IGetDetail_Listing_Listings : IProjectListingPayload
     {
     }
 }

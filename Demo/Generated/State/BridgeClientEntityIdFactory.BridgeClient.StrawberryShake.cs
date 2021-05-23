@@ -3,7 +3,7 @@
 
 namespace Logic.Graphql.Generated.State
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class BridgeClientEntityIdFactory : global::StrawberryShake.IEntityIdSerializer
     {
         private static readonly global::System.Text.Json.JsonWriterOptions _options = new global::System.Text.Json.JsonWriterOptions()

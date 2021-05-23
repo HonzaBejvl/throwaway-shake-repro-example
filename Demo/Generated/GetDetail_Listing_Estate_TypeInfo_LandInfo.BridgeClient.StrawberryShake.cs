@@ -6,18 +6,32 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Doplnující informace pro pozemky
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GetDetail_Listing_Estate_TypeInfo_LandInfo : global::System.IEquatable<GetDetail_Listing_Estate_TypeInfo_LandInfo>, IGetDetail_Listing_Estate_TypeInfo_LandInfo
     {
-        public GetDetail_Listing_Estate_TypeInfo_LandInfo(global::Logic.Graphql.Generated.LandType landlType, global::System.Double landArea)
+        public GetDetail_Listing_Estate_TypeInfo_LandInfo()
         {
-            LandlType = landlType;
-            LandArea = landArea;
         }
 
-        public global::Logic.Graphql.Generated.LandType LandlType { get; }
+        public virtual global::System.Boolean Equals(GetDetail_Listing_Estate_TypeInfo_LandInfo? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
 
-        public global::System.Double LandArea { get; }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
         {
@@ -39,33 +53,11 @@ namespace Logic.Graphql.Generated
             return Equals((GetDetail_Listing_Estate_TypeInfo_LandInfo)obj);
         }
 
-        public global::System.Boolean Equals(GetDetail_Listing_Estate_TypeInfo_LandInfo? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (LandlType.Equals(other.LandlType)) && LandArea == other.LandArea;
-        }
-
         public override global::System.Int32 GetHashCode()
         {
             unchecked
             {
                 int hash = 5;
-                hash ^= 397 * LandlType.GetHashCode();
-                hash ^= 397 * LandArea.GetHashCode();
                 return hash;
             }
         }

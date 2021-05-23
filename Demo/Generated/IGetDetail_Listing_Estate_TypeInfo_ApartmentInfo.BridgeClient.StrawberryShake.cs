@@ -6,8 +6,8 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Doplnující informace pro byty
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
-    public interface IGetDetail_Listing_Estate_TypeInfo_ApartmentInfo : IGetDetail_Listing_Estate_TypeInfo, IApartmentInfo
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
+    public interface IGetDetail_Listing_Estate_TypeInfo_ApartmentInfo : IGetDetail_Listing_Estate_TypeInfo
     {
     }
 }

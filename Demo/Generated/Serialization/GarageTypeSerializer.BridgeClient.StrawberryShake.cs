@@ -3,7 +3,7 @@
 
 namespace Logic.Graphql.Generated
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GarageTypeSerializer : global::StrawberryShake.Serialization.IInputValueFormatter, global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, GarageType>
     {
         public global::System.String TypeName => "GarageType";

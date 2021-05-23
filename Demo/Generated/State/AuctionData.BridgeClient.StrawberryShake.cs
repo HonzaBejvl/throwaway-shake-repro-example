@@ -4,59 +4,17 @@
 namespace Logic.Graphql.Generated.State
 {
     ///<summary>Aukce - nabídka typu aukce</summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class AuctionData : ISearchResultData, IListingData, IListingSimpleData
     {
-        public AuctionData(global::System.String __typename, global::Logic.Graphql.Generated.State.PriceData? startingPrice = default !, global::Logic.Graphql.Generated.ServiceType? serviceType = default !, global::Logic.Graphql.Generated.State.EstateData? estate = default !, global::System.String? listingId = default !, global::System.String? title = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ISlideData>? slideshow = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.PhotoData>? photos = default !, global::Logic.Graphql.Generated.State.ISellerData? seller = default !, global::System.String? description = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.VideoData>? videos = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.FloorPlanData>? floorPlans = default !, global::Logic.Graphql.Generated.ListingState? state = default !, global::System.DateTimeOffset? created = default !, global::System.DateTimeOffset? published = default !, global::System.DateTimeOffset? closed = default !)
+        public AuctionData(global::System.String __typename, global::Logic.Graphql.Generated.State.EstateData? estate = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            StartingPrice = startingPrice;
-            ServiceType = serviceType;
             Estate = estate;
-            ListingId = listingId;
-            Title = title;
-            Slideshow = slideshow;
-            Photos = photos;
-            Seller = seller;
-            Description = description;
-            Videos = videos;
-            FloorPlans = floorPlans;
-            State = state;
-            Created = created;
-            Published = published;
-            Closed = closed;
         }
 
         public global::System.String __typename { get; }
 
-        public global::Logic.Graphql.Generated.State.PriceData? StartingPrice { get; }
-
-        public global::Logic.Graphql.Generated.ServiceType? ServiceType { get; }
-
         public global::Logic.Graphql.Generated.State.EstateData? Estate { get; }
-
-        public global::System.String? ListingId { get; }
-
-        public global::System.String? Title { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ISlideData>? Slideshow { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.PhotoData>? Photos { get; }
-
-        public global::Logic.Graphql.Generated.State.ISellerData? Seller { get; }
-
-        public global::System.String? Description { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.VideoData>? Videos { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.FloorPlanData>? FloorPlans { get; }
-
-        public global::Logic.Graphql.Generated.ListingState? State { get; }
-
-        public global::System.DateTimeOffset? Created { get; }
-
-        public global::System.DateTimeOffset? Published { get; }
-
-        public global::System.DateTimeOffset? Closed { get; }
     }
 }

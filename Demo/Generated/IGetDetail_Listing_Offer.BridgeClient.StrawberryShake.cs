@@ -6,7 +6,7 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Standardní nabídka
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public interface IGetDetail_Listing_Offer : IGetDetail_Listing, IListingDetail_Offer
     {
     }

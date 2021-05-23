@@ -3,7 +3,7 @@
 
 namespace Logic.Graphql.Generated.State
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GetDetailResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::Logic.Graphql.Generated.GetDetailResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -33,45 +33,15 @@ namespace Logic.Graphql.Generated.State
             IGetDetail_Listing? returnValue;
             if (data is global::Logic.Graphql.Generated.State.AuctionData auction)
             {
-                if (auction.ServiceType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Auction(MapNonNullableIGetDetail_Listing_StartingPrice(auction.StartingPrice, snapshot), auction.ServiceType!.Value, MapNonNullableIGetDetail_Listing_Estate(auction.Estate, snapshot), MapNonNullableIGetDetail_Listing_Seller(auction.Seller, snapshot), auction.ListingId ?? throw new global::System.ArgumentNullException(), auction.Title, auction.Description, MapNonNullableIGetListingCards_Listings_Items_SlideshowNonNullableArray(auction.Slideshow, snapshot), MapNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(auction.Photos, snapshot), MapNonNullableIGetDetail_Listing_VideosNonNullableArray(auction.Videos, snapshot), MapNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(auction.FloorPlans, snapshot));
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Auction(MapNonNullableIGetDetail_Listing_Estate(auction.Estate, snapshot));
             }
             else if (data is global::Logic.Graphql.Generated.State.OfferData offer)
             {
-                if (offer.ServiceType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Offer(MapNonNullableIGetDetail_Listing_Price(offer.Price, snapshot), offer.ServiceType!.Value, MapNonNullableIGetDetail_Listing_Estate_1(offer.Estate, snapshot), MapNonNullableIGetDetail_Listing_Seller_1(offer.Seller, snapshot), offer.ListingId ?? throw new global::System.ArgumentNullException(), offer.Title, offer.Description, MapNonNullableIGetListingCards_Listings_Items_SlideshowNonNullableArray(offer.Slideshow, snapshot), MapNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(offer.Photos, snapshot), MapNonNullableIGetDetail_Listing_VideosNonNullableArray(offer.Videos, snapshot), MapNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(offer.FloorPlans, snapshot));
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Offer(MapNonNullableIGetDetail_Listing_Estate_1(offer.Estate, snapshot));
             }
             else if (data is global::Logic.Graphql.Generated.State.ProjectData project)
             {
-                if (project.ListingCount.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Project(MapNonNullableIGetDetail_Listing_Seller_2(project.Seller, snapshot), project.ListingCount!.Value, MapNonNullableIGetDetail_Listing_ListingsNonNullableArray(project.Listings, snapshot), project.ListingId ?? throw new global::System.ArgumentNullException(), project.Title, project.Description, MapNonNullableIGetListingCards_Listings_Items_SlideshowNonNullableArray(project.Slideshow, snapshot), MapNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(project.Photos, snapshot), MapNonNullableIGetDetail_Listing_VideosNonNullableArray(project.Videos, snapshot), MapNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(project.FloorPlans, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_StartingPrice MapNonNullableIGetDetail_Listing_StartingPrice(global::Logic.Graphql.Generated.State.PriceData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_StartingPrice returnValue = default !;
-            if (data.__typename.Equals("Price", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_StartingPrice_Price(data.Value ?? throw new global::System.ArgumentNullException(), data.OriginalCurrency ?? throw new global::System.ArgumentNullException(), data.Period ?? throw new global::System.ArgumentNullException(), data.Unit ?? throw new global::System.ArgumentNullException());
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Project(MapNonNullableIGetDetail_Listing_Listings(project.Listings, snapshot));
             }
             else
             {
@@ -86,7 +56,7 @@ namespace Logic.Graphql.Generated.State
             IGetDetail_Listing_Estate returnValue = default !;
             if (data.__typename.Equals("Estate", global::System.StringComparison.Ordinal))
             {
-                returnValue = new GetDetail_Listing_Estate_Estate(data.Type ?? throw new global::System.ArgumentNullException(), data.Electricity ?? throw new global::System.ArgumentNullException(), data.Gas ?? throw new global::System.ArgumentNullException(), data.Water ?? throw new global::System.ArgumentNullException(), data.Heating ?? throw new global::System.ArgumentNullException(), data.Waste ?? throw new global::System.ArgumentNullException(), data.Road ?? throw new global::System.ArgumentNullException(), data.NatureProtection ?? throw new global::System.ArgumentNullException(), data.Connectivity ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot), MapNonNullableIGetListingCards_Listings_Items_Estate_Address(data.Address ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new GetDetail_Listing_Estate_Estate(MapNonNullableIGetDetail_Listing_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -96,719 +66,38 @@ namespace Logic.Graphql.Generated.State
             return returnValue;
         }
 
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Estate_TypeInfo MapNonNullableIGetListingCards_Listings_Items_Estate_TypeInfo(global::Logic.Graphql.Generated.State.IEstateTypeInfoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Estate_TypeInfo MapNonNullableIGetDetail_Listing_Estate_TypeInfo(global::Logic.Graphql.Generated.State.IEstateTypeInfoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IGetListingCards_Listings_Items_Estate_TypeInfo? returnValue;
+            IGetDetail_Listing_Estate_TypeInfo? returnValue;
             if (data is global::Logic.Graphql.Generated.State.ApartmentInfoData apartmentInfo)
             {
-                if (apartmentInfo.ApartmentType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.UsableArea.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.Material.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.EnergyEfficiency.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.EnergyCertificate.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.Condition.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.CeilingHeight.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.AcceptanceYear.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.ConstructionYear.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.RoomCount.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.FloorNumber.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (apartmentInfo.Placement.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Estate_TypeInfo_ApartmentInfo(apartmentInfo.ApartmentType!.Value, apartmentInfo.UsableArea!.Value, apartmentInfo.Material!.Value, apartmentInfo.EnergyEfficiency!.Value, apartmentInfo.EnergyCertificate!.Value, apartmentInfo.Condition!.Value, apartmentInfo.BalconyArea, apartmentInfo.TerraceArea, apartmentInfo.LoggiaArea, apartmentInfo.CellarArea, apartmentInfo.CeilingHeight!.Value, apartmentInfo.PoolArea, apartmentInfo.AcceptanceYear!.Value, apartmentInfo.ConstructionYear!.Value, apartmentInfo.ReconstructionYear, apartmentInfo.Amenities, apartmentInfo.RoomCount!.Value, apartmentInfo.FloorNumber!.Value, apartmentInfo.ApartmentNumber ?? throw new global::System.ArgumentNullException(), apartmentInfo.Placement!.Value, apartmentInfo.SpecialClass);
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Estate_TypeInfo_ApartmentInfo();
             }
             else if (data is global::Logic.Graphql.Generated.State.HouseInfoData houseInfo)
             {
-                if (houseInfo.HouseType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.EnergyEfficiency.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.EnergyCertificate.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.Condition.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.Material.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.Placement.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.RoomCount.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.CeilingHeight.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.UsableArea.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.ConstructionYear.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.AcceptanceYear.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (houseInfo.LandArea.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Estate_TypeInfo_HouseInfo(houseInfo.HouseType!.Value, houseInfo.EnergyEfficiency!.Value, houseInfo.EnergyCertificate!.Value, houseInfo.Condition!.Value, houseInfo.Material!.Value, houseInfo.Placement!.Value, houseInfo.RoomCount!.Value, houseInfo.CeilingHeight!.Value, houseInfo.Amenities, houseInfo.UsableArea!.Value, houseInfo.BalconyArea, houseInfo.TerraceArea, houseInfo.LoggiaArea, houseInfo.ReconstructionYear, houseInfo.ConstructionYear!.Value, houseInfo.AcceptanceYear!.Value, houseInfo.CellarArea, houseInfo.PoolArea, houseInfo.LandArea!.Value);
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Estate_TypeInfo_HouseInfo();
             }
             else if (data is global::Logic.Graphql.Generated.State.LandInfoData landInfo)
             {
-                if (landInfo.LandlType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (landInfo.LandArea.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Estate_TypeInfo_LandInfo(landInfo.LandlType!.Value, landInfo.LandArea!.Value);
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Estate_TypeInfo_LandInfo();
             }
             else if (data is global::Logic.Graphql.Generated.State.CommercialInfoData commercialInfo)
             {
-                if (commercialInfo.CommercialType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.EnergyEfficiency.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.EnergyCertificate.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.Condition.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.Material.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.Placement.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.RoomCount.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.CeilingHeight.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.UsableArea.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.ConstructionYear.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (commercialInfo.AcceptanceYear.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Estate_TypeInfo_CommercialInfo(commercialInfo.CommercialType!.Value, commercialInfo.EnergyEfficiency!.Value, commercialInfo.EnergyCertificate!.Value, commercialInfo.Condition!.Value, commercialInfo.Material!.Value, commercialInfo.Placement!.Value, commercialInfo.RoomCount!.Value, commercialInfo.CeilingHeight!.Value, commercialInfo.Amenities, commercialInfo.UsableArea!.Value, commercialInfo.BalconyArea, commercialInfo.TerraceArea, commercialInfo.LoggiaArea, commercialInfo.CellarArea, commercialInfo.PoolArea, commercialInfo.ConstructionYear!.Value, commercialInfo.AcceptanceYear!.Value, commercialInfo.ReconstructionYear, commercialInfo.StoreArea, commercialInfo.OfficeArea, commercialInfo.WarehouseArea, commercialInfo.ProductionArea);
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Estate_TypeInfo_CommercialInfo();
             }
             else if (data is global::Logic.Graphql.Generated.State.GarageInfoData garageInfo)
             {
-                if (garageInfo.GarageType.HasValue)
+                if (!garageInfo.GarageType.HasValue)
                 {
                     throw new global::System.ArgumentNullException();
                 }
 
-                if (garageInfo.UsableArea.HasValue)
+                if (!garageInfo.UsableArea.HasValue)
                 {
                     throw new global::System.ArgumentNullException();
                 }
 
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Estate_TypeInfo_GarageInfo(garageInfo.GarageType!.Value, garageInfo.UsableArea!.Value);
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Estate_Address MapNonNullableIGetListingCards_Listings_Items_Estate_Address(global::Logic.Graphql.Generated.State.AddressListingData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Estate_Address returnValue = default !;
-            if (data.__typename.Equals("AddressListing", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetListingCards_Listings_Items_Estate_Address_AddressListing(data.Lat, data.Lng, data.CityName ?? throw new global::System.ArgumentNullException(), data.StreetName, data.RuianCode);
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller MapNonNullableIGetDetail_Listing_Seller(global::Logic.Graphql.Generated.State.ISellerData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.BrokerData broker)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Broker(broker.SellerId ?? throw new global::System.ArgumentNullException(), broker.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo(broker.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Company_3(broker.Company, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.CompanyData company)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Company(company.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_1(company.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Headquarters(company.Headquarters, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.IndividualData individual)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Individual(individual.SellerId ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.OfficeData office)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Office(office.SellerId ?? throw new global::System.ArgumentNullException(), office.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_2(office.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Company_4(office.Company, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_Photo MapNonNullableIGetDetail_Listing_Seller_Photo(global::Logic.Graphql.Generated.State.PhotoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_Photo returnValue = default !;
-            if (data.__typename.Equals("Photo", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Seller_Photo_Photo(data.FigureId ?? throw new global::System.ArgumentNullException(), data.Url ?? throw new global::System.ArgumentNullException(), data.OriginalUrl ?? throw new global::System.ArgumentNullException(), data.Is360 ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_Company_3 MapNonNullableIGetDetail_Listing_Seller_Company_3(global::Logic.Graphql.Generated.State.CompanyData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_Company_3 returnValue = default !;
-            if (data.__typename.Equals("Company", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Seller_Company_Company(data.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_1(data.Photo ?? throw new global::System.ArgumentNullException(), snapshot), MapNonNullableIGetDetail_Listing_Seller_Headquarters(data.Headquarters ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_Photo_1 MapNonNullableIGetDetail_Listing_Seller_Photo_1(global::Logic.Graphql.Generated.State.PhotoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_Photo_1 returnValue = default !;
-            if (data.__typename.Equals("Photo", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Seller_Photo_Photo_1(data.FigureId ?? throw new global::System.ArgumentNullException(), data.Url ?? throw new global::System.ArgumentNullException(), data.OriginalUrl ?? throw new global::System.ArgumentNullException(), data.Is360 ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_Headquarters MapNonNullableIGetDetail_Listing_Seller_Headquarters(global::Logic.Graphql.Generated.State.AddressData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_Headquarters returnValue = default !;
-            if (data.__typename.Equals("Address", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Seller_Headquarters_Address(data.Lat ?? throw new global::System.ArgumentNullException(), data.Lng ?? throw new global::System.ArgumentNullException(), data.CityName ?? throw new global::System.ArgumentNullException(), data.StreetName, data.RuianCode ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_Photo_2 MapNonNullableIGetDetail_Listing_Seller_Photo_2(global::Logic.Graphql.Generated.State.PhotoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_Photo_2 returnValue = default !;
-            if (data.__typename.Equals("Photo", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Seller_Photo_Photo_2(data.FigureId ?? throw new global::System.ArgumentNullException(), data.Url ?? throw new global::System.ArgumentNullException(), data.OriginalUrl ?? throw new global::System.ArgumentNullException(), data.Is360 ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_Company_4 MapNonNullableIGetDetail_Listing_Seller_Company_4(global::Logic.Graphql.Generated.State.CompanyData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_Company_4 returnValue = default !;
-            if (data.__typename.Equals("Company", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Seller_Company_Company_1(data.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_1(data.Photo ?? throw new global::System.ArgumentNullException(), snapshot), MapNonNullableIGetDetail_Listing_Seller_Headquarters(data.Headquarters ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow> MapNonNullableIGetListingCards_Listings_Items_SlideshowNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ISlideData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var slides = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow>();
-            foreach (global::Logic.Graphql.Generated.State.ISlideData child in list)
-            {
-                slides.Add(MapNonNullableIGetListingCards_Listings_Items_Slideshow(child, snapshot));
-            }
-
-            return slides;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow MapNonNullableIGetListingCards_Listings_Items_Slideshow(global::Logic.Graphql.Generated.State.ISlideData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.SlideDoubleData slideDouble)
-            {
-                if (slideDouble.Index.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (slideDouble.Layout.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_SlideDouble(slideDouble.Index!.Value, slideDouble.Layout!.Value, MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemOne(slideDouble.ItemOne, snapshot), MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemTwo(slideDouble.ItemTwo, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.SlideSingleData slideSingle)
-            {
-                if (slideSingle.Index.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_SlideSingle(slideSingle.Index!.Value, MapNonNullableIGetListingCards_Listings_Items_Slideshow_Item(slideSingle.Item, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.SlideTripleData slideTriple)
-            {
-                if (slideTriple.Index.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                if (slideTriple.Layout.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_SlideTriple(slideTriple.Index!.Value, slideTriple.Layout!.Value, MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemOne_1(slideTriple.ItemOne, snapshot), MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemTwo_1(slideTriple.ItemTwo, snapshot), MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemThree(slideTriple.ItemThree, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow_ItemOne MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemOne(global::Logic.Graphql.Generated.State.IFigureData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow_ItemOne? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.FloorPlanData floorPlan)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_FloorPlan();
-            }
-            else if (data is global::Logic.Graphql.Generated.State.MatterportData matterport)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_Matterport(matterport.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.PhotoData photo)
-            {
-                if (photo.Is360.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_Photo(photo.FigureId ?? throw new global::System.ArgumentNullException(), photo.Url ?? throw new global::System.ArgumentNullException(), photo.OriginalUrl ?? throw new global::System.ArgumentNullException(), photo.Is360!.Value);
-            }
-            else if (data is global::Logic.Graphql.Generated.State.VideoData video)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_Video(video.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow_ItemTwo MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemTwo(global::Logic.Graphql.Generated.State.IFigureData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow_ItemTwo? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.FloorPlanData floorPlan)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_FloorPlan();
-            }
-            else if (data is global::Logic.Graphql.Generated.State.MatterportData matterport)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_Matterport(matterport.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.PhotoData photo)
-            {
-                if (photo.Is360.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_Photo(photo.FigureId ?? throw new global::System.ArgumentNullException(), photo.Url ?? throw new global::System.ArgumentNullException(), photo.OriginalUrl ?? throw new global::System.ArgumentNullException(), photo.Is360!.Value);
-            }
-            else if (data is global::Logic.Graphql.Generated.State.VideoData video)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_Video(video.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow_Item MapNonNullableIGetListingCards_Listings_Items_Slideshow_Item(global::Logic.Graphql.Generated.State.IFigureData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow_Item? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.FloorPlanData floorPlan)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_Item_FloorPlan();
-            }
-            else if (data is global::Logic.Graphql.Generated.State.MatterportData matterport)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_Item_Matterport(matterport.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.PhotoData photo)
-            {
-                if (photo.Is360.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_Item_Photo(photo.FigureId ?? throw new global::System.ArgumentNullException(), photo.Url ?? throw new global::System.ArgumentNullException(), photo.OriginalUrl ?? throw new global::System.ArgumentNullException(), photo.Is360!.Value);
-            }
-            else if (data is global::Logic.Graphql.Generated.State.VideoData video)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_Item_Video(video.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow_ItemOne_1 MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemOne_1(global::Logic.Graphql.Generated.State.IFigureData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow_ItemOne_1? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.FloorPlanData floorPlan)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_FloorPlan_1();
-            }
-            else if (data is global::Logic.Graphql.Generated.State.MatterportData matterport)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_Matterport_1(matterport.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.PhotoData photo)
-            {
-                if (photo.Is360.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_Photo_1(photo.FigureId ?? throw new global::System.ArgumentNullException(), photo.Url ?? throw new global::System.ArgumentNullException(), photo.OriginalUrl ?? throw new global::System.ArgumentNullException(), photo.Is360!.Value);
-            }
-            else if (data is global::Logic.Graphql.Generated.State.VideoData video)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemOne_Video_1(video.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow_ItemTwo_1 MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemTwo_1(global::Logic.Graphql.Generated.State.IFigureData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow_ItemTwo_1? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.FloorPlanData floorPlan)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_FloorPlan_1();
-            }
-            else if (data is global::Logic.Graphql.Generated.State.MatterportData matterport)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_Matterport_1(matterport.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.PhotoData photo)
-            {
-                if (photo.Is360.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_Photo_1(photo.FigureId ?? throw new global::System.ArgumentNullException(), photo.Url ?? throw new global::System.ArgumentNullException(), photo.OriginalUrl ?? throw new global::System.ArgumentNullException(), photo.Is360!.Value);
-            }
-            else if (data is global::Logic.Graphql.Generated.State.VideoData video)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemTwo_Video_1(video.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Slideshow_ItemThree MapNonNullableIGetListingCards_Listings_Items_Slideshow_ItemThree(global::Logic.Graphql.Generated.State.IFigureData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Slideshow_ItemThree? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.FloorPlanData floorPlan)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemThree_FloorPlan();
-            }
-            else if (data is global::Logic.Graphql.Generated.State.MatterportData matterport)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemThree_Matterport(matterport.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.PhotoData photo)
-            {
-                if (photo.Is360.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemThree_Photo(photo.FigureId ?? throw new global::System.ArgumentNullException(), photo.Url ?? throw new global::System.ArgumentNullException(), photo.OriginalUrl ?? throw new global::System.ArgumentNullException(), photo.Is360!.Value);
-            }
-            else if (data is global::Logic.Graphql.Generated.State.VideoData video)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Slideshow_ItemThree_Video(video.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Photos> MapNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.PhotoData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var photos = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Photos>();
-            foreach (global::Logic.Graphql.Generated.State.PhotoData child in list)
-            {
-                photos.Add(MapNonNullableIGetListingCards_Listings_Items_Photos(child, snapshot));
-            }
-
-            return photos;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Photos MapNonNullableIGetListingCards_Listings_Items_Photos(global::Logic.Graphql.Generated.State.PhotoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Photos returnValue = default !;
-            if (data.__typename.Equals("Photo", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetListingCards_Listings_Items_Photos_Photo(data.FigureId ?? throw new global::System.ArgumentNullException(), data.Url ?? throw new global::System.ArgumentNullException(), data.OriginalUrl ?? throw new global::System.ArgumentNullException(), data.Is360 ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetDetail_Listing_Videos> MapNonNullableIGetDetail_Listing_VideosNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.VideoData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var videos = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.IGetDetail_Listing_Videos>();
-            foreach (global::Logic.Graphql.Generated.State.VideoData child in list)
-            {
-                videos.Add(MapNonNullableIGetDetail_Listing_Videos(child, snapshot));
-            }
-
-            return videos;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Videos MapNonNullableIGetDetail_Listing_Videos(global::Logic.Graphql.Generated.State.VideoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Videos returnValue = default !;
-            if (data.__typename.Equals("Video", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Videos_Video(data.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetDetail_Listing_FloorPlans> MapNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.FloorPlanData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var floorPlans = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.IGetDetail_Listing_FloorPlans>();
-            foreach (global::Logic.Graphql.Generated.State.FloorPlanData child in list)
-            {
-                floorPlans.Add(MapNonNullableIGetDetail_Listing_FloorPlans(child, snapshot));
-            }
-
-            return floorPlans;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_FloorPlans MapNonNullableIGetDetail_Listing_FloorPlans(global::Logic.Graphql.Generated.State.FloorPlanData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_FloorPlans returnValue = default !;
-            if (data.__typename.Equals("FloorPlan", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_FloorPlans_FloorPlan(data.FigureId ?? throw new global::System.ArgumentNullException(), data.Url ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Price MapNonNullableIGetDetail_Listing_Price(global::Logic.Graphql.Generated.State.PriceData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Price returnValue = default !;
-            if (data.__typename.Equals("Price", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetDetail_Listing_Price_Price(data.Value ?? throw new global::System.ArgumentNullException(), data.OriginalCurrency ?? throw new global::System.ArgumentNullException(), data.Period ?? throw new global::System.ArgumentNullException(), data.Unit ?? throw new global::System.ArgumentNullException());
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Estate_TypeInfo_GarageInfo(garageInfo.GarageType!.Value, garageInfo.UsableArea!.Value);
             }
             else
             {
@@ -823,7 +112,7 @@ namespace Logic.Graphql.Generated.State
             IGetDetail_Listing_Estate_1 returnValue = default !;
             if (data.__typename.Equals("Estate", global::System.StringComparison.Ordinal))
             {
-                returnValue = new GetDetail_Listing_Estate_Estate_1(data.Type ?? throw new global::System.ArgumentNullException(), data.Electricity ?? throw new global::System.ArgumentNullException(), data.Gas ?? throw new global::System.ArgumentNullException(), data.Water ?? throw new global::System.ArgumentNullException(), data.Heating ?? throw new global::System.ArgumentNullException(), data.Waste ?? throw new global::System.ArgumentNullException(), data.Road ?? throw new global::System.ArgumentNullException(), data.NatureProtection ?? throw new global::System.ArgumentNullException(), data.Connectivity ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot), MapNonNullableIGetListingCards_Listings_Items_Estate_Address(data.Address ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new GetDetail_Listing_Estate_Estate_1(MapNonNullableIGetDetail_Listing_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -833,24 +122,12 @@ namespace Logic.Graphql.Generated.State
             return returnValue;
         }
 
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_1 MapNonNullableIGetDetail_Listing_Seller_1(global::Logic.Graphql.Generated.State.ISellerData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings MapNonNullableIGetDetail_Listing_Listings(global::Logic.Graphql.Generated.State.ProjectListingPayloadData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IGetDetail_Listing_Seller_1? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.BrokerData broker)
+            IGetDetail_Listing_Listings returnValue = default !;
+            if (data.__typename.Equals("ProjectListingPayload", global::System.StringComparison.Ordinal))
             {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Broker_1(broker.SellerId ?? throw new global::System.ArgumentNullException(), broker.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo(broker.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Company_3(broker.Company, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.CompanyData company)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Company_1(company.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_1(company.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Headquarters(company.Headquarters, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.IndividualData individual)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Individual_1(individual.SellerId ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.OfficeData office)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Office_1(office.SellerId ?? throw new global::System.ArgumentNullException(), office.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_2(office.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Company_4(office.Company, snapshot));
+                returnValue = new GetDetail_Listing_Listings_ProjectListingPayload(MapNonNullableIGetDetail_Listing_Listings_ItemsNonNullableArray(data.Items ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -860,55 +137,28 @@ namespace Logic.Graphql.Generated.State
             return returnValue;
         }
 
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_2 MapNonNullableIGetDetail_Listing_Seller_2(global::Logic.Graphql.Generated.State.ISellerData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetDetail_Listing_Seller_2? returnValue;
-            if (data is global::Logic.Graphql.Generated.State.BrokerData broker)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Broker_2(broker.SellerId ?? throw new global::System.ArgumentNullException(), broker.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo(broker.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Company_3(broker.Company, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.CompanyData company)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Company_2(company.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_1(company.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Headquarters(company.Headquarters, snapshot));
-            }
-            else if (data is global::Logic.Graphql.Generated.State.IndividualData individual)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Individual_2(individual.SellerId ?? throw new global::System.ArgumentNullException());
-            }
-            else if (data is global::Logic.Graphql.Generated.State.OfficeData office)
-            {
-                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Seller_Office_2(office.SellerId ?? throw new global::System.ArgumentNullException(), office.Name ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetDetail_Listing_Seller_Photo_2(office.Photo, snapshot), MapNonNullableIGetDetail_Listing_Seller_Company_4(office.Company, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetDetail_Listing_Listings> MapNonNullableIGetDetail_Listing_ListingsNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ProjectListingData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items> MapNonNullableIGetDetail_Listing_Listings_ItemsNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ProjectListingData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (list is null)
             {
                 throw new global::System.ArgumentNullException();
             }
 
-            var projectListings = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.IGetDetail_Listing_Listings>();
+            var projectListings = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items>();
             foreach (global::Logic.Graphql.Generated.State.ProjectListingData child in list)
             {
-                projectListings.Add(MapNonNullableIGetDetail_Listing_Listings(child, snapshot));
+                projectListings.Add(MapNonNullableIGetDetail_Listing_Listings_Items(child, snapshot));
             }
 
             return projectListings;
         }
 
-        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings MapNonNullableIGetDetail_Listing_Listings(global::Logic.Graphql.Generated.State.ProjectListingData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items MapNonNullableIGetDetail_Listing_Listings_Items(global::Logic.Graphql.Generated.State.ProjectListingData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IGetDetail_Listing_Listings returnValue = default !;
+            IGetDetail_Listing_Listings_Items returnValue = default !;
             if (data.__typename.Equals("ProjectListing", global::System.StringComparison.Ordinal))
             {
-                returnValue = new GetDetail_Listing_Listings_ProjectListing(data.SatisfiesFilter ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_Listings_Listing(data.Listing ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new GetDetail_Listing_Listings_Items_ProjectListing(MapNonNullableIGetDetail_Listing_Listings_Items_Listing(data.Listing ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -918,26 +168,67 @@ namespace Logic.Graphql.Generated.State
             return returnValue;
         }
 
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Listings_Listing MapNonNullableIGetListingCards_Listings_Items_Listings_Listing(global::Logic.Graphql.Generated.State.IListingSimpleData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items_Listing MapNonNullableIGetDetail_Listing_Listings_Items_Listing(global::Logic.Graphql.Generated.State.IListingSimpleData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IGetListingCards_Listings_Items_Listings_Listing? returnValue;
+            IGetDetail_Listing_Listings_Items_Listing? returnValue;
             if (data is global::Logic.Graphql.Generated.State.AuctionData auction)
             {
-                if (auction.ServiceType.HasValue)
-                {
-                    throw new global::System.ArgumentNullException();
-                }
-
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Listings_Listing_Auction(auction.ListingId ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_StartingPrice(auction.StartingPrice, snapshot), auction.ServiceType!.Value, MapNonNullableIGetListingCards_Listings_Items_Estate(auction.Estate, snapshot));
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Auction(MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate(auction.Estate, snapshot));
             }
             else if (data is global::Logic.Graphql.Generated.State.OfferData offer)
             {
-                if (offer.ServiceType.HasValue)
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Offer(MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_1(offer.Estate, snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items_Listing_Estate MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate(global::Logic.Graphql.Generated.State.EstateData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IGetDetail_Listing_Listings_Items_Listing_Estate returnValue = default !;
+            if (data.__typename.Equals("Estate", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new GetDetail_Listing_Listings_Items_Listing_Estate_Estate(MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo(global::Logic.Graphql.Generated.State.IEstateTypeInfoData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IGetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo? returnValue;
+            if (data is global::Logic.Graphql.Generated.State.ApartmentInfoData apartmentInfo)
+            {
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo_ApartmentInfo();
+            }
+            else if (data is global::Logic.Graphql.Generated.State.HouseInfoData houseInfo)
+            {
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo_HouseInfo();
+            }
+            else if (data is global::Logic.Graphql.Generated.State.LandInfoData landInfo)
+            {
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo_LandInfo();
+            }
+            else if (data is global::Logic.Graphql.Generated.State.CommercialInfoData commercialInfo)
+            {
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo_CommercialInfo();
+            }
+            else if (data is global::Logic.Graphql.Generated.State.GarageInfoData garageInfo)
+            {
+                if (!garageInfo.GarageType.HasValue)
                 {
                     throw new global::System.ArgumentNullException();
                 }
 
-                returnValue = new global::Logic.Graphql.Generated.GetListingCards_Listings_Items_Listings_Listing_Offer(offer.ListingId ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_Price(offer.Price, snapshot), offer.ServiceType!.Value, MapNonNullableIGetListingCards_Listings_Items_Estate_1(offer.Estate, snapshot));
+                returnValue = new global::Logic.Graphql.Generated.GetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo_GarageInfo(garageInfo.GarageType!.Value);
             }
             else
             {
@@ -947,57 +238,12 @@ namespace Logic.Graphql.Generated.State
             return returnValue;
         }
 
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_StartingPrice MapNonNullableIGetListingCards_Listings_Items_StartingPrice(global::Logic.Graphql.Generated.State.PriceData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::Logic.Graphql.Generated.IGetDetail_Listing_Listings_Items_Listing_Estate_1 MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_1(global::Logic.Graphql.Generated.State.EstateData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IGetListingCards_Listings_Items_StartingPrice returnValue = default !;
-            if (data.__typename.Equals("Price", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetListingCards_Listings_Items_StartingPrice_Price(data.Value ?? throw new global::System.ArgumentNullException(), data.OriginalCurrency ?? throw new global::System.ArgumentNullException(), data.Period ?? throw new global::System.ArgumentNullException(), data.Unit ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Estate MapNonNullableIGetListingCards_Listings_Items_Estate(global::Logic.Graphql.Generated.State.EstateData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Estate returnValue = default !;
+            IGetDetail_Listing_Listings_Items_Listing_Estate_1 returnValue = default !;
             if (data.__typename.Equals("Estate", global::System.StringComparison.Ordinal))
             {
-                returnValue = new GetListingCards_Listings_Items_Estate_Estate(data.Type ?? throw new global::System.ArgumentNullException(), data.Electricity ?? throw new global::System.ArgumentNullException(), data.Gas ?? throw new global::System.ArgumentNullException(), data.Water ?? throw new global::System.ArgumentNullException(), data.Heating ?? throw new global::System.ArgumentNullException(), data.Waste ?? throw new global::System.ArgumentNullException(), data.Road ?? throw new global::System.ArgumentNullException(), data.NatureProtection ?? throw new global::System.ArgumentNullException(), data.Connectivity ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot), MapNonNullableIGetListingCards_Listings_Items_Estate_Address(data.Address ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Price MapNonNullableIGetListingCards_Listings_Items_Price(global::Logic.Graphql.Generated.State.PriceData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Price returnValue = default !;
-            if (data.__typename.Equals("Price", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetListingCards_Listings_Items_Price_Price(data.Value ?? throw new global::System.ArgumentNullException(), data.OriginalCurrency ?? throw new global::System.ArgumentNullException(), data.Period ?? throw new global::System.ArgumentNullException(), data.Unit ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Estate_1 MapNonNullableIGetListingCards_Listings_Items_Estate_1(global::Logic.Graphql.Generated.State.EstateData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IGetListingCards_Listings_Items_Estate_1 returnValue = default !;
-            if (data.__typename.Equals("Estate", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new GetListingCards_Listings_Items_Estate_Estate_1(data.Type ?? throw new global::System.ArgumentNullException(), data.Electricity ?? throw new global::System.ArgumentNullException(), data.Gas ?? throw new global::System.ArgumentNullException(), data.Water ?? throw new global::System.ArgumentNullException(), data.Heating ?? throw new global::System.ArgumentNullException(), data.Waste ?? throw new global::System.ArgumentNullException(), data.Road ?? throw new global::System.ArgumentNullException(), data.NatureProtection ?? throw new global::System.ArgumentNullException(), data.Connectivity ?? throw new global::System.ArgumentNullException(), MapNonNullableIGetListingCards_Listings_Items_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot), MapNonNullableIGetListingCards_Listings_Items_Estate_Address(data.Address ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new GetDetail_Listing_Listings_Items_Listing_Estate_Estate_1(MapNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_TypeInfo(data.TypeInfo ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {

@@ -6,7 +6,7 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Aukce - nabídka typu aukce
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public interface IGetDetail_Listing_Auction : IGetDetail_Listing, IListingDetail_Auction
     {
     }

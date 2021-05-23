@@ -6,7 +6,7 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Root type pro read operace nemovizor API.
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GetDetailResult : global::System.IEquatable<GetDetailResult>, IGetDetailResult
     {
         public GetDetailResult(global::Logic.Graphql.Generated.IGetDetail_Listing listing)
@@ -16,10 +16,28 @@ namespace Logic.Graphql.Generated
 
         /// <summary>
         /// Vyhledání inzerátu dle ID
-        /// 
-        /// Vrací null pokud inzerát neexistuje nebo pokud klient nemá práva na jeho zobrazení.
         /// </summary>
         public global::Logic.Graphql.Generated.IGetDetail_Listing Listing { get; }
+
+        public virtual global::System.Boolean Equals(GetDetailResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Listing.Equals(other.Listing));
+        }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
         {
@@ -39,26 +57,6 @@ namespace Logic.Graphql.Generated
             }
 
             return Equals((GetDetailResult)obj);
-        }
-
-        public global::System.Boolean Equals(GetDetailResult? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (Listing.Equals(other.Listing));
         }
 
         public override global::System.Int32 GetHashCode()

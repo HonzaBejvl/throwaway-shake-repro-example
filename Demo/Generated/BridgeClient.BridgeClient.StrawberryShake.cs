@@ -6,61 +6,16 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Represents the BridgeClient GraphQL client
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class BridgeClient : global::Logic.Graphql.Generated.IBridgeClient
     {
-        private readonly global::Logic.Graphql.Generated.IGetFilterCountQuery _getFilterCount;
-        private readonly global::Logic.Graphql.Generated.IGetListingCardsQuery _getListingCards;
-        private readonly global::Logic.Graphql.Generated.IGetPointsQuery _getPoints;
         private readonly global::Logic.Graphql.Generated.IGetDetailQuery _getDetail;
-        private readonly global::Logic.Graphql.Generated.IGetDetailAdminQuery _getDetailAdmin;
-        private readonly global::Logic.Graphql.Generated.IGetSellerQuery _getSeller;
-        private readonly global::Logic.Graphql.Generated.IGetCardQuery _getCard;
-        private readonly global::Logic.Graphql.Generated.IGetAllSearchResultsQuery _getAllSearchResults;
-        private readonly global::Logic.Graphql.Generated.IGetCurrentViewerSellerQuery _getCurrentViewerSeller;
-        private readonly global::Logic.Graphql.Generated.IGetCurrentViewerListingsQuery _getCurrentViewerListings;
-        private readonly global::Logic.Graphql.Generated.IListingAddPhotoMutation _listingAddPhoto;
-        private readonly global::Logic.Graphql.Generated.IListingAddVideoMutation _listingAddVideo;
-        private readonly global::Logic.Graphql.Generated.IListingAddFloorPlanMutation _listingAddFloorPlan;
-        private readonly global::Logic.Graphql.Generated.IListingAddMutation _listingAdd;
-        private readonly global::Logic.Graphql.Generated.IListingEditMutation _listingEdit;
-        private readonly global::Logic.Graphql.Generated.IListingSetStateMutation _listingSetState;
-        public BridgeClient(global::Logic.Graphql.Generated.IGetFilterCountQuery getFilterCount, global::Logic.Graphql.Generated.IGetListingCardsQuery getListingCards, global::Logic.Graphql.Generated.IGetPointsQuery getPoints, global::Logic.Graphql.Generated.IGetDetailQuery getDetail, global::Logic.Graphql.Generated.IGetDetailAdminQuery getDetailAdmin, global::Logic.Graphql.Generated.IGetSellerQuery getSeller, global::Logic.Graphql.Generated.IGetCardQuery getCard, global::Logic.Graphql.Generated.IGetAllSearchResultsQuery getAllSearchResults, global::Logic.Graphql.Generated.IGetCurrentViewerSellerQuery getCurrentViewerSeller, global::Logic.Graphql.Generated.IGetCurrentViewerListingsQuery getCurrentViewerListings, global::Logic.Graphql.Generated.IListingAddPhotoMutation listingAddPhoto, global::Logic.Graphql.Generated.IListingAddVideoMutation listingAddVideo, global::Logic.Graphql.Generated.IListingAddFloorPlanMutation listingAddFloorPlan, global::Logic.Graphql.Generated.IListingAddMutation listingAdd, global::Logic.Graphql.Generated.IListingEditMutation listingEdit, global::Logic.Graphql.Generated.IListingSetStateMutation listingSetState)
+        public BridgeClient(global::Logic.Graphql.Generated.IGetDetailQuery getDetail)
         {
-            _getFilterCount = getFilterCount ?? throw new global::System.ArgumentNullException(nameof(getFilterCount));
-            _getListingCards = getListingCards ?? throw new global::System.ArgumentNullException(nameof(getListingCards));
-            _getPoints = getPoints ?? throw new global::System.ArgumentNullException(nameof(getPoints));
             _getDetail = getDetail ?? throw new global::System.ArgumentNullException(nameof(getDetail));
-            _getDetailAdmin = getDetailAdmin ?? throw new global::System.ArgumentNullException(nameof(getDetailAdmin));
-            _getSeller = getSeller ?? throw new global::System.ArgumentNullException(nameof(getSeller));
-            _getCard = getCard ?? throw new global::System.ArgumentNullException(nameof(getCard));
-            _getAllSearchResults = getAllSearchResults ?? throw new global::System.ArgumentNullException(nameof(getAllSearchResults));
-            _getCurrentViewerSeller = getCurrentViewerSeller ?? throw new global::System.ArgumentNullException(nameof(getCurrentViewerSeller));
-            _getCurrentViewerListings = getCurrentViewerListings ?? throw new global::System.ArgumentNullException(nameof(getCurrentViewerListings));
-            _listingAddPhoto = listingAddPhoto ?? throw new global::System.ArgumentNullException(nameof(listingAddPhoto));
-            _listingAddVideo = listingAddVideo ?? throw new global::System.ArgumentNullException(nameof(listingAddVideo));
-            _listingAddFloorPlan = listingAddFloorPlan ?? throw new global::System.ArgumentNullException(nameof(listingAddFloorPlan));
-            _listingAdd = listingAdd ?? throw new global::System.ArgumentNullException(nameof(listingAdd));
-            _listingEdit = listingEdit ?? throw new global::System.ArgumentNullException(nameof(listingEdit));
-            _listingSetState = listingSetState ?? throw new global::System.ArgumentNullException(nameof(listingSetState));
         }
 
         public static global::System.String ClientName => "BridgeClient";
-        public global::Logic.Graphql.Generated.IGetFilterCountQuery GetFilterCount => _getFilterCount;
-        public global::Logic.Graphql.Generated.IGetListingCardsQuery GetListingCards => _getListingCards;
-        public global::Logic.Graphql.Generated.IGetPointsQuery GetPoints => _getPoints;
         public global::Logic.Graphql.Generated.IGetDetailQuery GetDetail => _getDetail;
-        public global::Logic.Graphql.Generated.IGetDetailAdminQuery GetDetailAdmin => _getDetailAdmin;
-        public global::Logic.Graphql.Generated.IGetSellerQuery GetSeller => _getSeller;
-        public global::Logic.Graphql.Generated.IGetCardQuery GetCard => _getCard;
-        public global::Logic.Graphql.Generated.IGetAllSearchResultsQuery GetAllSearchResults => _getAllSearchResults;
-        public global::Logic.Graphql.Generated.IGetCurrentViewerSellerQuery GetCurrentViewerSeller => _getCurrentViewerSeller;
-        public global::Logic.Graphql.Generated.IGetCurrentViewerListingsQuery GetCurrentViewerListings => _getCurrentViewerListings;
-        public global::Logic.Graphql.Generated.IListingAddPhotoMutation ListingAddPhoto => _listingAddPhoto;
-        public global::Logic.Graphql.Generated.IListingAddVideoMutation ListingAddVideo => _listingAddVideo;
-        public global::Logic.Graphql.Generated.IListingAddFloorPlanMutation ListingAddFloorPlan => _listingAddFloorPlan;
-        public global::Logic.Graphql.Generated.IListingAddMutation ListingAdd => _listingAdd;
-        public global::Logic.Graphql.Generated.IListingEditMutation ListingEdit => _listingEdit;
-        public global::Logic.Graphql.Generated.IListingSetStateMutation ListingSetState => _listingSetState;
     }
 }

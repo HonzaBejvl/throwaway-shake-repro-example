@@ -3,7 +3,7 @@
 
 namespace Logic.Graphql.Generated.State
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GetDetailResultInfo : global::StrawberryShake.IOperationResultDataInfo
     {
         private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
@@ -17,8 +17,6 @@ namespace Logic.Graphql.Generated.State
 
         /// <summary>
         /// Vyhledání inzerátu dle ID
-        /// 
-        /// Vrací null pokud inzerát neexistuje nebo pokud klient nemá práva na jeho zobrazení.
         /// </summary>
         public global::Logic.Graphql.Generated.State.IListingData Listing { get; }
 

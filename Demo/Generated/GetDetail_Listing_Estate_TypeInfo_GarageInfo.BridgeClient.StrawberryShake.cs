@@ -6,7 +6,7 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Doplnující informace pro garáže a ostatní nemovitosti
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GetDetail_Listing_Estate_TypeInfo_GarageInfo : global::System.IEquatable<GetDetail_Listing_Estate_TypeInfo_GarageInfo>, IGetDetail_Listing_Estate_TypeInfo_GarageInfo
     {
         public GetDetail_Listing_Estate_TypeInfo_GarageInfo(global::Logic.Graphql.Generated.GarageType garageType, global::System.Double usableArea)
@@ -18,6 +18,26 @@ namespace Logic.Graphql.Generated
         public global::Logic.Graphql.Generated.GarageType GarageType { get; }
 
         public global::System.Double UsableArea { get; }
+
+        public virtual global::System.Boolean Equals(GetDetail_Listing_Estate_TypeInfo_GarageInfo? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (GarageType.Equals(other.GarageType)) && UsableArea == other.UsableArea;
+        }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
         {
@@ -37,26 +57,6 @@ namespace Logic.Graphql.Generated
             }
 
             return Equals((GetDetail_Listing_Estate_TypeInfo_GarageInfo)obj);
-        }
-
-        public global::System.Boolean Equals(GetDetail_Listing_Estate_TypeInfo_GarageInfo? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (GarageType.Equals(other.GarageType)) && UsableArea == other.UsableArea;
         }
 
         public override global::System.Int32 GetHashCode()

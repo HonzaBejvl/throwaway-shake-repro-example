@@ -3,81 +3,23 @@
 
 namespace Logic.Graphql.Generated.State
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class GetDetailBuilder : global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::Logic.Graphql.Generated.IGetDetailResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
         private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
         private readonly global::StrawberryShake.IOperationResultDataFactory<global::Logic.Graphql.Generated.IGetDetailResult> _resultDataFactory;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Currency> _currencyParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.ServiceType> _serviceTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.PricePeriod> _pricePeriodParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.PriceUnit> _priceUnitParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.EstateType> _estateTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Electricity> _electricityParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Gas> _gasParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Water> _waterParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Heating> _heatingParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Waste> _wasteParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Road> _roadParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.NatureProtection> _natureProtectionParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Connectivity> _connectivityParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.ApartmentType> _apartmentTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Material> _materialParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.EnergyEfficiency> _energyEfficiencyParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.EnergyCertificate> _energyCertificateParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Condition> _conditionParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Amenity> _amenityParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.Placement> _placementParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.ApartmentSpecialType> _apartmentSpecialTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.LandType> _landTypeParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.GarageType> _garageTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.HouseType> _houseTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.CommercialType> _commercialTypeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::Logic.Graphql.Generated.SlideLayout> _slideLayoutParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _iDParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Double, global::System.Double> _floatParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.Uri> _urlParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Boolean, global::System.Boolean> _booleanParser;
         public GetDetailBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::Logic.Graphql.Generated.IGetDetailResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
             _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
             _resultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
-            _currencyParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Currency>("Currency") ?? throw new global::System.ArgumentException("No serializer for type `Currency` found.");
-            _serviceTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.ServiceType>("ServiceType") ?? throw new global::System.ArgumentException("No serializer for type `ServiceType` found.");
-            _pricePeriodParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.PricePeriod>("PricePeriod") ?? throw new global::System.ArgumentException("No serializer for type `PricePeriod` found.");
-            _priceUnitParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.PriceUnit>("PriceUnit") ?? throw new global::System.ArgumentException("No serializer for type `PriceUnit` found.");
-            _estateTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.EstateType>("EstateType") ?? throw new global::System.ArgumentException("No serializer for type `EstateType` found.");
-            _electricityParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Electricity>("Electricity") ?? throw new global::System.ArgumentException("No serializer for type `Electricity` found.");
-            _gasParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Gas>("Gas") ?? throw new global::System.ArgumentException("No serializer for type `Gas` found.");
-            _waterParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Water>("Water") ?? throw new global::System.ArgumentException("No serializer for type `Water` found.");
-            _heatingParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Heating>("Heating") ?? throw new global::System.ArgumentException("No serializer for type `Heating` found.");
-            _wasteParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Waste>("Waste") ?? throw new global::System.ArgumentException("No serializer for type `Waste` found.");
-            _roadParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Road>("Road") ?? throw new global::System.ArgumentException("No serializer for type `Road` found.");
-            _natureProtectionParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.NatureProtection>("NatureProtection") ?? throw new global::System.ArgumentException("No serializer for type `NatureProtection` found.");
-            _connectivityParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Connectivity>("Connectivity") ?? throw new global::System.ArgumentException("No serializer for type `Connectivity` found.");
-            _apartmentTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.ApartmentType>("ApartmentType") ?? throw new global::System.ArgumentException("No serializer for type `ApartmentType` found.");
-            _materialParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Material>("Material") ?? throw new global::System.ArgumentException("No serializer for type `Material` found.");
-            _energyEfficiencyParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.EnergyEfficiency>("EnergyEfficiency") ?? throw new global::System.ArgumentException("No serializer for type `EnergyEfficiency` found.");
-            _energyCertificateParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.EnergyCertificate>("EnergyCertificate") ?? throw new global::System.ArgumentException("No serializer for type `EnergyCertificate` found.");
-            _conditionParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Condition>("Condition") ?? throw new global::System.ArgumentException("No serializer for type `Condition` found.");
-            _amenityParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Amenity>("Amenity") ?? throw new global::System.ArgumentException("No serializer for type `Amenity` found.");
-            _placementParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.Placement>("Placement") ?? throw new global::System.ArgumentException("No serializer for type `Placement` found.");
-            _apartmentSpecialTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.ApartmentSpecialType>("ApartmentSpecialType") ?? throw new global::System.ArgumentException("No serializer for type `ApartmentSpecialType` found.");
-            _landTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.LandType>("LandType") ?? throw new global::System.ArgumentException("No serializer for type `LandType` found.");
             _garageTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.GarageType>("GarageType") ?? throw new global::System.ArgumentException("No serializer for type `GarageType` found.");
-            _houseTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.HouseType>("HouseType") ?? throw new global::System.ArgumentException("No serializer for type `HouseType` found.");
-            _commercialTypeParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.CommercialType>("CommercialType") ?? throw new global::System.ArgumentException("No serializer for type `CommercialType` found.");
-            _slideLayoutParser = serializerResolver.GetLeafValueParser<global::System.String, global::Logic.Graphql.Generated.SlideLayout>("SlideLayout") ?? throw new global::System.ArgumentException("No serializer for type `SlideLayout` found.");
             _iDParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("ID") ?? throw new global::System.ArgumentException("No serializer for type `ID` found.");
-            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
-            _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
             _floatParser = serializerResolver.GetLeafValueParser<global::System.Double, global::System.Double>("Float") ?? throw new global::System.ArgumentException("No serializer for type `Float` found.");
-            _urlParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.Uri>("Url") ?? throw new global::System.ArgumentException("No serializer for type `Url` found.");
-            _booleanParser = serializerResolver.GetLeafValueParser<global::System.Boolean, global::System.Boolean>("Boolean") ?? throw new global::System.ArgumentException("No serializer for type `Boolean` found.");
         }
 
         public global::StrawberryShake.IOperationResult<IGetDetailResult> Build(global::StrawberryShake.Response<global::System.Text.Json.JsonDocument> response)
@@ -136,86 +78,20 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Auction", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.AuctionData(typename, startingPrice: DeserializeNonNullableIGetDetail_Listing_StartingPrice(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "startingPrice")), serviceType: DeserializeNonNullableServiceType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "serviceType")), estate: DeserializeNonNullableIGetDetail_Listing_Estate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")), seller: DeserializeNonNullableISellerData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "seller")), listingId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listingId")), title: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), description: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), slideshow: DeserializeNonNullableISlideDataNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "slideshow")), photos: DeserializeNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photos")), videos: DeserializeNonNullableIGetDetail_Listing_VideosNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "videos")), floorPlans: DeserializeNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "floorPlans")));
+                return new global::Logic.Graphql.Generated.State.AuctionData(typename, estate: DeserializeNonNullableIGetDetail_Listing_Estate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")));
             }
 
             if (typename?.Equals("Offer", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.OfferData(typename, price: DeserializeNonNullableIGetDetail_Listing_Price(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), serviceType: DeserializeNonNullableServiceType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "serviceType")), estate: DeserializeNonNullableIGetDetail_Listing_Estate_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")), seller: DeserializeNonNullableISellerData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "seller")), listingId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listingId")), title: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), description: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), slideshow: DeserializeNonNullableISlideDataNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "slideshow")), photos: DeserializeNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photos")), videos: DeserializeNonNullableIGetDetail_Listing_VideosNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "videos")), floorPlans: DeserializeNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "floorPlans")));
+                return new global::Logic.Graphql.Generated.State.OfferData(typename, estate: DeserializeNonNullableIGetDetail_Listing_Estate_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")));
             }
 
             if (typename?.Equals("Project", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.ProjectData(typename, seller: DeserializeNonNullableISellerData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "seller")), listingCount: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listingCount")), listings: DeserializeNonNullableIGetDetail_Listing_ListingsNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listings")), listingId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listingId")), title: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "title")), description: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "description")), slideshow: DeserializeNonNullableISlideDataNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "slideshow")), photos: DeserializeNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photos")), videos: DeserializeNonNullableIGetDetail_Listing_VideosNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "videos")), floorPlans: DeserializeNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "floorPlans")));
+                return new global::Logic.Graphql.Generated.State.ProjectData(typename, listings: DeserializeNonNullableIGetDetail_Listing_Listings(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listings")));
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.PriceData DeserializeNonNullableIGetDetail_Listing_StartingPrice(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Price", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PriceData(typename, @value: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "value")), originalCurrency: DeserializeNonNullableCurrency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalCurrency")), period: DeserializeNonNullablePricePeriod(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "period")), unit: DeserializeNonNullablePriceUnit(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "unit")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Double DeserializeNonNullableDouble(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _floatParser.Parse(obj.Value.GetDouble()!);
-        }
-
-        private global::Logic.Graphql.Generated.Currency DeserializeNonNullableCurrency(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _currencyParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.PricePeriod DeserializeNonNullablePricePeriod(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _pricePeriodParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.PriceUnit DeserializeNonNullablePriceUnit(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _priceUnitParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.ServiceType DeserializeNonNullableServiceType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _serviceTypeParser.Parse(obj.Value.GetString()!);
         }
 
         private global::Logic.Graphql.Generated.State.EstateData DeserializeNonNullableIGetDetail_Listing_Estate(global::System.Text.Json.JsonElement? obj)
@@ -228,212 +104,10 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Estate", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.EstateData(typename, type: DeserializeNonNullableEstateType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "type")), electricity: DeserializeNonNullableElectricityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "electricity")), gas: DeserializeNonNullableGasNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "gas")), water: DeserializeNonNullableWaterNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "water")), heating: DeserializeNonNullableHeatingNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "heating")), waste: DeserializeNonNullableWasteNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "waste")), road: DeserializeNonNullableRoadNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "road")), natureProtection: DeserializeNonNullableNatureProtection(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "natureProtection")), connectivity: DeserializeNonNullableConnectivityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "connectivity")), typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")), address: DeserializeNonNullableIGetListingCards_Listings_Items_Estate_Address(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")));
+                return new global::Logic.Graphql.Generated.State.EstateData(typename, typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")));
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.EstateType DeserializeNonNullableEstateType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _estateTypeParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Electricity> DeserializeNonNullableElectricityNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var electricitys = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Electricity>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                electricitys.Add(DeserializeNonNullableElectricity(child));
-            }
-
-            return electricitys;
-        }
-
-        private global::Logic.Graphql.Generated.Electricity DeserializeNonNullableElectricity(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _electricityParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Gas> DeserializeNonNullableGasNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var gass = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Gas>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                gass.Add(DeserializeNonNullableGas(child));
-            }
-
-            return gass;
-        }
-
-        private global::Logic.Graphql.Generated.Gas DeserializeNonNullableGas(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _gasParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Water> DeserializeNonNullableWaterNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var waters = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Water>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                waters.Add(DeserializeNonNullableWater(child));
-            }
-
-            return waters;
-        }
-
-        private global::Logic.Graphql.Generated.Water DeserializeNonNullableWater(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _waterParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Heating> DeserializeNonNullableHeatingNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var heatings = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Heating>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                heatings.Add(DeserializeNonNullableHeating(child));
-            }
-
-            return heatings;
-        }
-
-        private global::Logic.Graphql.Generated.Heating DeserializeNonNullableHeating(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _heatingParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Waste> DeserializeNonNullableWasteNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var wastes = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Waste>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                wastes.Add(DeserializeNonNullableWaste(child));
-            }
-
-            return wastes;
-        }
-
-        private global::Logic.Graphql.Generated.Waste DeserializeNonNullableWaste(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _wasteParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Road> DeserializeNonNullableRoadNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var roads = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Road>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                roads.Add(DeserializeNonNullableRoad(child));
-            }
-
-            return roads;
-        }
-
-        private global::Logic.Graphql.Generated.Road DeserializeNonNullableRoad(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _roadParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.NatureProtection DeserializeNonNullableNatureProtection(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _natureProtectionParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Connectivity> DeserializeNonNullableConnectivityNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var connectivitys = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Connectivity>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                connectivitys.Add(DeserializeNonNullableConnectivity(child));
-            }
-
-            return connectivitys;
-        }
-
-        private global::Logic.Graphql.Generated.Connectivity DeserializeNonNullableConnectivity(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _connectivityParser.Parse(obj.Value.GetString()!);
         }
 
         private global::Logic.Graphql.Generated.State.IEstateTypeInfoData DeserializeNonNullableIEstateTypeInfoData(global::System.Text.Json.JsonElement? obj)
@@ -446,22 +120,22 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("ApartmentInfo", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.ApartmentInfoData(typename, apartmentType: DeserializeNonNullableApartmentType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "apartmentType")), usableArea: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "usableArea")), material: DeserializeNonNullableMaterial(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "material")), energyEfficiency: DeserializeNonNullableEnergyEfficiency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "energyEfficiency")), energyCertificate: DeserializeNonNullableEnergyCertificate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "energyCertificate")), condition: DeserializeNonNullableCondition(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "condition")), balconyArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "balconyArea")), terraceArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "terraceArea")), loggiaArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loggiaArea")), cellarArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "cellarArea")), ceilingHeight: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "ceilingHeight")), poolArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "poolArea")), acceptanceYear: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "acceptanceYear")), constructionYear: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "constructionYear")), reconstructionYear: DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reconstructionYear")), amenities: DeserializeAmenityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amenities")), roomCount: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "roomCount")), floorNumber: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "floorNumber")), apartmentNumber: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "apartmentNumber")), placement: DeserializeNonNullablePlacement(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "placement")), specialClass: DeserializeApartmentSpecialTypeNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "specialClass")));
+                return new global::Logic.Graphql.Generated.State.ApartmentInfoData(typename);
             }
 
             if (typename?.Equals("HouseInfo", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.HouseInfoData(typename, houseType: DeserializeNonNullableHouseType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "houseType")), energyEfficiency: DeserializeNonNullableEnergyEfficiency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "energyEfficiency")), energyCertificate: DeserializeNonNullableEnergyCertificate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "energyCertificate")), condition: DeserializeNonNullableCondition(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "condition")), material: DeserializeNonNullableMaterial(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "material")), placement: DeserializeNonNullablePlacement(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "placement")), roomCount: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "roomCount")), ceilingHeight: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "ceilingHeight")), amenities: DeserializeAmenityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amenities")), usableArea: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "usableArea")), balconyArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "balconyArea")), terraceArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "terraceArea")), loggiaArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loggiaArea")), reconstructionYear: DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reconstructionYear")), constructionYear: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "constructionYear")), acceptanceYear: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "acceptanceYear")), cellarArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "cellarArea")), poolArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "poolArea")), landArea: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landArea")));
+                return new global::Logic.Graphql.Generated.State.HouseInfoData(typename);
             }
 
             if (typename?.Equals("LandInfo", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.LandInfoData(typename, landlType: DeserializeNonNullableLandType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landlType")), landArea: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "landArea")));
+                return new global::Logic.Graphql.Generated.State.LandInfoData(typename);
             }
 
             if (typename?.Equals("CommercialInfo", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.CommercialInfoData(typename, commercialType: DeserializeNonNullableCommercialType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "commercialType")), energyEfficiency: DeserializeNonNullableEnergyEfficiency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "energyEfficiency")), energyCertificate: DeserializeNonNullableEnergyCertificate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "energyCertificate")), condition: DeserializeNonNullableCondition(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "condition")), material: DeserializeNonNullableMaterial(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "material")), placement: DeserializeNonNullablePlacement(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "placement")), roomCount: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "roomCount")), ceilingHeight: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "ceilingHeight")), amenities: DeserializeAmenityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "amenities")), usableArea: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "usableArea")), balconyArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "balconyArea")), terraceArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "terraceArea")), loggiaArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "loggiaArea")), cellarArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "cellarArea")), poolArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "poolArea")), constructionYear: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "constructionYear")), acceptanceYear: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "acceptanceYear")), reconstructionYear: DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "reconstructionYear")), storeArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "storeArea")), officeArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "officeArea")), warehouseArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "warehouseArea")), productionArea: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "productionArea")));
+                return new global::Logic.Graphql.Generated.State.CommercialInfoData(typename);
             }
 
             if (typename?.Equals("GarageInfo", global::System.StringComparison.Ordinal) ?? false)
@@ -470,188 +144,6 @@ namespace Logic.Graphql.Generated.State
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.ApartmentType DeserializeNonNullableApartmentType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _apartmentTypeParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.Material DeserializeNonNullableMaterial(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _materialParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.EnergyEfficiency DeserializeNonNullableEnergyEfficiency(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _energyEfficiencyParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.EnergyCertificate DeserializeNonNullableEnergyCertificate(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _energyCertificateParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.Condition DeserializeNonNullableCondition(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _conditionParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Double? DeserializeDouble(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            return _floatParser.Parse(obj.Value.GetDouble()!);
-        }
-
-        private global::System.Int32 DeserializeNonNullableInt32(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _intParser.Parse(obj.Value.GetInt32()!);
-        }
-
-        private global::System.Int32? DeserializeInt32(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            return _intParser.Parse(obj.Value.GetInt32()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Amenity>? DeserializeAmenityNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            var amenitys = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.Amenity>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                amenitys.Add(DeserializeNonNullableAmenity(child));
-            }
-
-            return amenitys;
-        }
-
-        private global::Logic.Graphql.Generated.Amenity DeserializeNonNullableAmenity(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _amenityParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.String DeserializeNonNullableString(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.Placement DeserializeNonNullablePlacement(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _placementParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.ApartmentSpecialType>? DeserializeApartmentSpecialTypeNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            var apartmentSpecialTypes = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.ApartmentSpecialType>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                apartmentSpecialTypes.Add(DeserializeNonNullableApartmentSpecialType(child));
-            }
-
-            return apartmentSpecialTypes;
-        }
-
-        private global::Logic.Graphql.Generated.ApartmentSpecialType DeserializeNonNullableApartmentSpecialType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _apartmentSpecialTypeParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.HouseType DeserializeNonNullableHouseType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _houseTypeParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.LandType DeserializeNonNullableLandType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _landTypeParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.CommercialType DeserializeNonNullableCommercialType(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _commercialTypeParser.Parse(obj.Value.GetString()!);
         }
 
         private global::Logic.Graphql.Generated.GarageType DeserializeNonNullableGarageType(global::System.Text.Json.JsonElement? obj)
@@ -664,372 +156,14 @@ namespace Logic.Graphql.Generated.State
             return _garageTypeParser.Parse(obj.Value.GetString()!);
         }
 
-        private global::Logic.Graphql.Generated.State.AddressListingData DeserializeNonNullableIGetListingCards_Listings_Items_Estate_Address(global::System.Text.Json.JsonElement? obj)
+        private global::System.Double DeserializeNonNullableDouble(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
                 throw new global::System.ArgumentNullException();
             }
 
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("AddressListing", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.AddressListingData(typename, lat: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lat")), lng: DeserializeDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lng")), cityName: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "cityName")), streetName: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "streetName")), ruianCode: DeserializeInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "ruianCode")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String? DeserializeString(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.State.ISellerData DeserializeNonNullableISellerData(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Broker", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.BrokerData(typename, sellerId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "sellerId")), name: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), photo: DeserializeNonNullableIGetDetail_Listing_Seller_Photo(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photo")), company: DeserializeNonNullableIGetDetail_Listing_Seller_Company_3(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "company")));
-            }
-
-            if (typename?.Equals("Company", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.CompanyData(typename, name: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), photo: DeserializeNonNullableIGetDetail_Listing_Seller_Photo_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photo")), headquarters: DeserializeNonNullableIGetDetail_Listing_Seller_Headquarters(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "headquarters")));
-            }
-
-            if (typename?.Equals("Individual", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.IndividualData(typename, sellerId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "sellerId")));
-            }
-
-            if (typename?.Equals("Office", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.OfficeData(typename, sellerId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "sellerId")), name: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), photo: DeserializeNonNullableIGetDetail_Listing_Seller_Photo_2(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photo")), company: DeserializeNonNullableIGetDetail_Listing_Seller_Company_4(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "company")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.PhotoData DeserializeNonNullableIGetDetail_Listing_Seller_Photo(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Photo", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PhotoData(typename, figureId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "figureId")), url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")), originalUrl: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalUrl")), is360: DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "is360")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Uri DeserializeNonNullableUri(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _urlParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Boolean DeserializeNonNullableBoolean(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _booleanParser.Parse(obj.Value.GetBoolean()!);
-        }
-
-        private global::Logic.Graphql.Generated.State.CompanyData DeserializeNonNullableIGetDetail_Listing_Seller_Company_3(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Company", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.CompanyData(typename, name: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), photo: DeserializeNonNullableIGetDetail_Listing_Seller_Photo_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photo")), headquarters: DeserializeNonNullableIGetDetail_Listing_Seller_Headquarters(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "headquarters")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.PhotoData DeserializeNonNullableIGetDetail_Listing_Seller_Photo_1(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Photo", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PhotoData(typename, figureId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "figureId")), url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")), originalUrl: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalUrl")), is360: DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "is360")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.AddressData DeserializeNonNullableIGetDetail_Listing_Seller_Headquarters(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Address", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.AddressData(typename, lat: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lat")), lng: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "lng")), cityName: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "cityName")), streetName: DeserializeString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "streetName")), ruianCode: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "ruianCode")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.PhotoData DeserializeNonNullableIGetDetail_Listing_Seller_Photo_2(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Photo", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PhotoData(typename, figureId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "figureId")), url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")), originalUrl: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalUrl")), is360: DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "is360")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.CompanyData DeserializeNonNullableIGetDetail_Listing_Seller_Company_4(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Company", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.CompanyData(typename, name: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")), photo: DeserializeNonNullableIGetDetail_Listing_Seller_Photo_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "photo")), headquarters: DeserializeNonNullableIGetDetail_Listing_Seller_Headquarters(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "headquarters")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ISlideData> DeserializeNonNullableISlideDataNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var slides = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.State.ISlideData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                slides.Add(DeserializeNonNullableISlideData(child));
-            }
-
-            return slides;
-        }
-
-        private global::Logic.Graphql.Generated.State.ISlideData DeserializeNonNullableISlideData(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("SlideDouble", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.SlideDoubleData(typename, index: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "index")), layout: DeserializeNonNullableSlideLayout(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "layout")), itemOne: DeserializeNonNullableIFigureData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "itemOne")), itemTwo: DeserializeNonNullableIFigureData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "itemTwo")));
-            }
-
-            if (typename?.Equals("SlideSingle", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.SlideSingleData(typename, index: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "index")), item: DeserializeNonNullableIFigureData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "item")));
-            }
-
-            if (typename?.Equals("SlideTriple", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.SlideTripleData(typename, index: DeserializeNonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "index")), layout: DeserializeNonNullableSlideLayout(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "layout")), itemOne: DeserializeNonNullableIFigureData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "itemOne")), itemTwo: DeserializeNonNullableIFigureData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "itemTwo")), itemThree: DeserializeNonNullableIFigureData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "itemThree")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.SlideLayout DeserializeNonNullableSlideLayout(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _slideLayoutParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::Logic.Graphql.Generated.State.IFigureData DeserializeNonNullableIFigureData(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("FloorPlan", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.FloorPlanData(typename);
-            }
-
-            if (typename?.Equals("Matterport", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.MatterportData(typename, url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")));
-            }
-
-            if (typename?.Equals("Photo", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PhotoData(typename, figureId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "figureId")), url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")), originalUrl: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalUrl")), is360: DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "is360")));
-            }
-
-            if (typename?.Equals("Video", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.VideoData(typename, url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.PhotoData> DeserializeNonNullableIGetListingCards_Listings_Items_PhotosNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var photos = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.State.PhotoData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                photos.Add(DeserializeNonNullableIGetListingCards_Listings_Items_Photos(child));
-            }
-
-            return photos;
-        }
-
-        private global::Logic.Graphql.Generated.State.PhotoData DeserializeNonNullableIGetListingCards_Listings_Items_Photos(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Photo", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PhotoData(typename, figureId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "figureId")), url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")), originalUrl: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalUrl")), is360: DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "is360")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.VideoData> DeserializeNonNullableIGetDetail_Listing_VideosNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var videos = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.State.VideoData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                videos.Add(DeserializeNonNullableIGetDetail_Listing_Videos(child));
-            }
-
-            return videos;
-        }
-
-        private global::Logic.Graphql.Generated.State.VideoData DeserializeNonNullableIGetDetail_Listing_Videos(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Video", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.VideoData(typename, url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.FloorPlanData> DeserializeNonNullableIGetDetail_Listing_FloorPlansNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var floorPlans = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.State.FloorPlanData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                floorPlans.Add(DeserializeNonNullableIGetDetail_Listing_FloorPlans(child));
-            }
-
-            return floorPlans;
-        }
-
-        private global::Logic.Graphql.Generated.State.FloorPlanData DeserializeNonNullableIGetDetail_Listing_FloorPlans(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("FloorPlan", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.FloorPlanData(typename, figureId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "figureId")), url: DeserializeNonNullableUri(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "url")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.PriceData DeserializeNonNullableIGetDetail_Listing_Price(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Price", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PriceData(typename, @value: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "value")), originalCurrency: DeserializeNonNullableCurrency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalCurrency")), period: DeserializeNonNullablePricePeriod(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "period")), unit: DeserializeNonNullablePriceUnit(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "unit")));
-            }
-
-            throw new global::System.NotSupportedException();
+            return _floatParser.Parse(obj.Value.GetDouble()!);
         }
 
         private global::Logic.Graphql.Generated.State.EstateData DeserializeNonNullableIGetDetail_Listing_Estate_1(global::System.Text.Json.JsonElement? obj)
@@ -1042,13 +176,29 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Estate", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.EstateData(typename, type: DeserializeNonNullableEstateType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "type")), electricity: DeserializeNonNullableElectricityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "electricity")), gas: DeserializeNonNullableGasNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "gas")), water: DeserializeNonNullableWaterNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "water")), heating: DeserializeNonNullableHeatingNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "heating")), waste: DeserializeNonNullableWasteNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "waste")), road: DeserializeNonNullableRoadNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "road")), natureProtection: DeserializeNonNullableNatureProtection(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "natureProtection")), connectivity: DeserializeNonNullableConnectivityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "connectivity")), typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")), address: DeserializeNonNullableIGetListingCards_Listings_Items_Estate_Address(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")));
+                return new global::Logic.Graphql.Generated.State.EstateData(typename, typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ProjectListingData> DeserializeNonNullableIGetDetail_Listing_ListingsNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        private global::Logic.Graphql.Generated.State.ProjectListingPayloadData DeserializeNonNullableIGetDetail_Listing_Listings(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("ProjectListingPayload", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::Logic.Graphql.Generated.State.ProjectListingPayloadData(typename, items: DeserializeNonNullableIGetDetail_Listing_Listings_ItemsNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "items")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.State.ProjectListingData> DeserializeNonNullableIGetDetail_Listing_Listings_ItemsNonNullableArray(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -1058,13 +208,13 @@ namespace Logic.Graphql.Generated.State
             var projectListings = new global::System.Collections.Generic.List<global::Logic.Graphql.Generated.State.ProjectListingData>();
             foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
             {
-                projectListings.Add(DeserializeNonNullableIGetDetail_Listing_Listings(child));
+                projectListings.Add(DeserializeNonNullableIGetDetail_Listing_Listings_Items(child));
             }
 
             return projectListings;
         }
 
-        private global::Logic.Graphql.Generated.State.ProjectListingData DeserializeNonNullableIGetDetail_Listing_Listings(global::System.Text.Json.JsonElement? obj)
+        private global::Logic.Graphql.Generated.State.ProjectListingData DeserializeNonNullableIGetDetail_Listing_Listings_Items(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -1074,7 +224,7 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("ProjectListing", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.ProjectListingData(typename, satisfiesFilter: DeserializeNonNullableBoolean(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "satisfiesFilter")), listing: DeserializeNonNullableIListingSimpleData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listing")));
+                return new global::Logic.Graphql.Generated.State.ProjectListingData(typename, listing: DeserializeNonNullableIListingSimpleData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listing")));
             }
 
             throw new global::System.NotSupportedException();
@@ -1090,34 +240,18 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Auction", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.AuctionData(typename, listingId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listingId")), startingPrice: DeserializeNonNullableIGetListingCards_Listings_Items_StartingPrice(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "startingPrice")), serviceType: DeserializeNonNullableServiceType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "serviceType")), estate: DeserializeNonNullableIGetListingCards_Listings_Items_Estate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")));
+                return new global::Logic.Graphql.Generated.State.AuctionData(typename, estate: DeserializeNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")));
             }
 
             if (typename?.Equals("Offer", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.OfferData(typename, listingId: DeserializeNonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "listingId")), price: DeserializeNonNullableIGetListingCards_Listings_Items_Price(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "price")), serviceType: DeserializeNonNullableServiceType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "serviceType")), estate: DeserializeNonNullableIGetListingCards_Listings_Items_Estate_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")));
+                return new global::Logic.Graphql.Generated.State.OfferData(typename, estate: DeserializeNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_1(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "estate")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::Logic.Graphql.Generated.State.PriceData DeserializeNonNullableIGetListingCards_Listings_Items_StartingPrice(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Price", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PriceData(typename, @value: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "value")), originalCurrency: DeserializeNonNullableCurrency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalCurrency")), period: DeserializeNonNullablePricePeriod(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "period")), unit: DeserializeNonNullablePriceUnit(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "unit")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.EstateData DeserializeNonNullableIGetListingCards_Listings_Items_Estate(global::System.Text.Json.JsonElement? obj)
+        private global::Logic.Graphql.Generated.State.EstateData DeserializeNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -1127,29 +261,13 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Estate", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.EstateData(typename, type: DeserializeNonNullableEstateType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "type")), electricity: DeserializeNonNullableElectricityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "electricity")), gas: DeserializeNonNullableGasNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "gas")), water: DeserializeNonNullableWaterNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "water")), heating: DeserializeNonNullableHeatingNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "heating")), waste: DeserializeNonNullableWasteNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "waste")), road: DeserializeNonNullableRoadNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "road")), natureProtection: DeserializeNonNullableNatureProtection(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "natureProtection")), connectivity: DeserializeNonNullableConnectivityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "connectivity")), typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")), address: DeserializeNonNullableIGetListingCards_Listings_Items_Estate_Address(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")));
+                return new global::Logic.Graphql.Generated.State.EstateData(typename, typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::Logic.Graphql.Generated.State.PriceData DeserializeNonNullableIGetListingCards_Listings_Items_Price(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Price", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::Logic.Graphql.Generated.State.PriceData(typename, @value: DeserializeNonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "value")), originalCurrency: DeserializeNonNullableCurrency(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "originalCurrency")), period: DeserializeNonNullablePricePeriod(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "period")), unit: DeserializeNonNullablePriceUnit(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "unit")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::Logic.Graphql.Generated.State.EstateData DeserializeNonNullableIGetListingCards_Listings_Items_Estate_1(global::System.Text.Json.JsonElement? obj)
+        private global::Logic.Graphql.Generated.State.EstateData DeserializeNonNullableIGetDetail_Listing_Listings_Items_Listing_Estate_1(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -1159,7 +277,7 @@ namespace Logic.Graphql.Generated.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Estate", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::Logic.Graphql.Generated.State.EstateData(typename, type: DeserializeNonNullableEstateType(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "type")), electricity: DeserializeNonNullableElectricityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "electricity")), gas: DeserializeNonNullableGasNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "gas")), water: DeserializeNonNullableWaterNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "water")), heating: DeserializeNonNullableHeatingNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "heating")), waste: DeserializeNonNullableWasteNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "waste")), road: DeserializeNonNullableRoadNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "road")), natureProtection: DeserializeNonNullableNatureProtection(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "natureProtection")), connectivity: DeserializeNonNullableConnectivityNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "connectivity")), typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")), address: DeserializeNonNullableIGetListingCards_Listings_Items_Estate_Address(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "address")));
+                return new global::Logic.Graphql.Generated.State.EstateData(typename, typeInfo: DeserializeNonNullableIEstateTypeInfoData(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "typeInfo")));
             }
 
             throw new global::System.NotSupportedException();

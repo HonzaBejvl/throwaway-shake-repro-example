@@ -3,19 +3,16 @@
 
 namespace Logic.Graphql.Generated.State
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class ProjectListingData
     {
-        public ProjectListingData(global::System.String __typename, global::System.Boolean? satisfiesFilter = default !, global::Logic.Graphql.Generated.State.IListingSimpleData? listing = default !)
+        public ProjectListingData(global::System.String __typename, global::Logic.Graphql.Generated.State.IListingSimpleData? listing = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            SatisfiesFilter = satisfiesFilter;
             Listing = listing;
         }
 
         public global::System.String __typename { get; }
-
-        public global::System.Boolean? SatisfiesFilter { get; }
 
         public global::Logic.Graphql.Generated.State.IListingSimpleData? Listing { get; }
     }

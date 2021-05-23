@@ -1,999 +1,1076 @@
+"""
+Nemovizor GraphQL API
+
+Tento dokument popisuje funcionalitu Nemovizor API, které pro komunikaci používá technologii GraphQL a protokol HTTPS.
+Případně je také možno použít převodní můstek z technologie XMLRPC, která je využívána portálem SReality.cz.
+
+API endpoint se nechází na adrese: https://api.nemovizor.cz/
+Více informací o technologii GraphQL: https://graphql.org/
+Více informací o GraphQL přes HTTPS: https://graphql.org/learn/serving-over-http/
+Více informací o převodním můstku z XMLRPC: https://github.com/infinityloop-dev/nemovizor-sreality/
+"""
 schema {
-  query: Query
-  mutation: Mutation
-  subscription: null
+query: Query
+mutation: Mutation
+subscription: null
 }
 
 """
 Grafická položka - např. fotka nebo video
 """
 interface Figure {
-  figureId: ID!
-  url: Url!
+figureId: ID!
+url: Url!
 }
 
 """
 Abstraktní nabídka - obyčejná nabídka, aukce nebo projekt
 """
 interface Listing {
-  listingId: ID!
-  customId: ID
-  state: ListingState!
-  url: Url!
-  title(lang: Language! = CS): String
-  description(lang: Language! = CS): String
-  seller: Seller!
-  slideshow(linear: Boolean = false): [Slide!]!
-  photos: [Photo!]!
-  videos: [Video!]!
-  floorPlans: [FloorPlan!]!
-  matterport: Matterport
-  comments: [Comment!]!
-  created: DateTime! @auth(level: [OWNER, COWORKER])
-  published: DateTime
-  closed: DateTime @auth(level: [OWNER, COWORKER])
+listingId: ID!
+customId: ID
+state: ListingState!
+url: Url!
+title(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+description(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+seller: Seller!
+slideshow(
+linear: Boolean = false
+): [Slide!]!
+photos: [Photo!]!
+videos: [Video!]!
+floorPlans: [FloorPlan!]!
+matterport: Matterport
+comments: [Comment!]!
+created: DateTime! @auth(level: [OWNER,COWORKER])
+published: DateTime
+modified: DateTime! @auth(level: [OWNER,COWORKER])
+closed: DateTime @auth(level: [OWNER,COWORKER])
 }
 
 """
 Abstraktní jednoduchá nabídka - obyčejná nabídka nebo aukce
 """
 interface ListingSimple implements Listing {
-  listingId: ID!
-  customId: ID
-  state: ListingState!
-  url: Url!
-  title(lang: Language! = CS): String
-  description(lang: Language! = CS): String
-  seller: Seller!
-  slideshow(linear: Boolean = false): [Slide!]!
-  photos: [Photo!]!
-  videos: [Video!]!
-  floorPlans: [FloorPlan!]!
-  matterport: Matterport
-  comments: [Comment!]!
-  created: DateTime! @auth(level: [OWNER, COWORKER])
-  published: DateTime
-  closed: DateTime @auth(level: [OWNER, COWORKER])
-  estate: Estate!
-  serviceType: ServiceType!
-  serviceTypeInfo: ServiceTypeInfo!
+listingId: ID!
+customId: ID
+state: ListingState!
+url: Url!
+title(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+description(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+seller: Seller!
+slideshow(
+linear: Boolean = false
+): [Slide!]!
+photos: [Photo!]!
+videos: [Video!]!
+floorPlans: [FloorPlan!]!
+matterport: Matterport
+comments: [Comment!]!
+created: DateTime! @auth(level: [OWNER,COWORKER])
+published: DateTime
+modified: DateTime! @auth(level: [OWNER,COWORKER])
+closed: DateTime @auth(level: [OWNER,COWORKER])
+estate: Estate!
+serviceType: ServiceType!
+serviceTypeInfo: ServiceTypeInfo!
 }
 
 interface Point {
-  gps: Gps!
+gps: Gps!
 }
 
 interface PointListing implements Point {
-  gps: Gps!
-  listingId: ID!
+gps: Gps!
+listingId: ID!
 }
 
 interface Seller {
-  sellerId: ID!
-  listings: [Listing!]!
+sellerId: ID!
+listings: [Listing!]!
 }
 
 interface SellerCorporate implements Seller {
-  sellerId: ID!
-  listings: [Listing!]!
-  name: String!
-  description: String!
-  photo: Photo!
-  figures: [Figure!]!
-  email: EmailAddress!
-  subordinates: [SellerStructural!]! @loggedIn @auth(level: [COWORKER])
+sellerId: ID!
+listings: [Listing!]!
+name: String!
+description: String!
+photo: Photo!
+figures: [Figure!]!
+email: EmailAddress!
+subordinates: [SellerStructural!]! @loggedIn @auth(level: [OWNER,COWORKER])
 }
 
 interface SellerStructural implements Seller & SellerCorporate {
-  sellerId: ID!
-  listings: [Listing!]!
-  name: String!
-  description: String!
-  photo: Photo!
-  figures: [Figure!]!
-  email: EmailAddress!
-  subordinates: [SellerStructural!]! @loggedIn @auth(level: [COWORKER])
-  supervisor: SellerCorporate! @loggedIn @auth(level: [COWORKER])
+sellerId: ID!
+listings: [Listing!]!
+name: String!
+description: String!
+photo: Photo!
+figures: [Figure!]!
+email: EmailAddress!
+subordinates: [SellerStructural!]! @loggedIn @auth(level: [OWNER,COWORKER])
+supervisor: SellerCorporate! @loggedIn @auth(level: [OWNER,COWORKER])
 }
 
 interface Slide {
-  index: Int! @intConstraint(min: 0)
+index: Int! @intConstraint(min: 0)
+}
+
+"""
+Adapter přístup - přístupové údaje pro sreality adaptér.
+"""
+type AdapterAccess {
+clientId: Int!
+password: String!
+swKey: String!
 }
 
 """
 Adresa - plné zobrazení adresy
 """
 type Address {
-  country: Country!
-  cityName: String!
-  cityPartName: String
-  postalCode: String!
-  streetName: String
-  dscNumber: String
-  eviNumber: String
-  oriNumber: String
-  lat: Float!
-  lng: Float!
-  ruianCode: Int!
-  blur: AddressBlur!
+country: Country!
+cityName: String!
+cityPartName: String
+postalCode: String!
+streetName: String
+dscNumber: String
+eviNumber: String
+oriNumber: String
+lat: Float!
+lng: Float!
+ruianCode: Int!
+blur: AddressBlur!
 }
 
 """
 Adresa v detailu nabídky - položky nabývají hodnoty null v případě rozostření adresy
 """
 type AddressListing {
-  country: Country!
-  cityName: String!
-  cityPartName: String
-  postalCode: String
-  streetName: String
-  dscNumber: String
-  eviNumber: String
-  oriNumber: String
-  lat: Float
-  lng: Float
-  ruianCode: Int
+country: Country!
+cityName: String!
+cityPartName: String
+postalCode: String
+streetName: String
+dscNumber: String
+eviNumber: String
+oriNumber: String
+lat: Float
+lng: Float
+ruianCode: Int
 }
 
 """
 Doplnující informace pro byty
 """
 type ApartmentInfo {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  placementSpecial: [PlacementSpecial!]!
-  roomCount: Int!
-  ceilingHeight: Float!
-  amenities: [Amenity!]
-  usableArea: Float!
-  balconyArea: Float
-  terraceArea: Float
-  loggiaArea: Float
-  cellarArea: Float
-  poolArea: Float
-  constructionYear: Int!
-  acceptanceYear: Int!
-  reconstructionYear: Int
-  type: ApartmentType!
-  apartmentNumber: String!
-  floorNumber: Int!
-  specialClass: [ApartmentSpecialType!]
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float!
+usableArea: Float!
+constructionYear: Int!
+acceptanceYear: Int!
+reconstructionYear: Int
+roomCount: Int!
+balconyArea: Float
+terraceArea: Float
+loggiaArea: Float
+cellarArea: Float
+poolArea: Float
+amenities: [Amenity!]!
+type: ApartmentType!
+apartmentNumber: String!
+floorNumber: Int!
+specialClass: [ApartmentSpecialType!]!
 }
 
 """
 Aukce - nabídka typu aukce
 """
 type Auction implements Listing & ListingSimple {
-  listingId: ID!
-  customId: ID
-  state: ListingState!
-  url: Url!
-  title(lang: Language! = CS): String
-  description(lang: Language! = CS): String
-  seller: Seller!
-  slideshow(linear: Boolean = false): [Slide!]!
-  photos: [Photo!]!
-  videos: [Video!]!
-  floorPlans: [FloorPlan!]!
-  matterport: Matterport
-  comments: [Comment!]!
-  created: DateTime! @auth(level: [OWNER, COWORKER])
-  published: DateTime
-  closed: DateTime @auth(level: [OWNER, COWORKER])
-  estate: Estate!
-  serviceType: ServiceType!
-  serviceTypeInfo: ServiceTypeInfo!
-  startingPrice: Price!
+listingId: ID!
+customId: ID
+state: ListingState!
+url: Url!
+title(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+description(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+seller: Seller!
+slideshow(
+linear: Boolean = false
+): [Slide!]!
+photos: [Photo!]!
+videos: [Video!]!
+floorPlans: [FloorPlan!]!
+matterport: Matterport
+comments: [Comment!]!
+created: DateTime! @auth(level: [OWNER,COWORKER])
+published: DateTime
+modified: DateTime! @auth(level: [OWNER,COWORKER])
+closed: DateTime @auth(level: [OWNER,COWORKER])
+estate: Estate!
+serviceType: ServiceType!
+serviceTypeInfo: ServiceTypeInfo!
+startingPrice: Price!
 }
 
 type Broker implements Seller & SellerCorporate & SellerStructural {
-  sellerId: ID!
-  listings: [Listing!]!
-  name: String!
-  description: String!
-  photo: Photo!
-  figures: [Figure!]!
-  email: EmailAddress!
-  subordinates: [SellerStructural!]! @loggedIn @auth(level: [COWORKER])
-  supervisor: SellerCorporate! @loggedIn @auth(level: [COWORKER])
-  company: Company!
+sellerId: ID!
+listings: [Listing!]!
+name: String!
+description: String!
+photo: Photo!
+figures: [Figure!]!
+email: EmailAddress!
+subordinates: [SellerStructural!]! @loggedIn @auth(level: [OWNER,COWORKER])
+supervisor: SellerCorporate! @loggedIn @auth(level: [OWNER,COWORKER])
+company: Company!
 }
 
 type Comment {
-  commentId: ID!
-  value: String!
-  dateTime: String!
-  poster: String!
-  replies: Comment!
+commentId: ID!
+value: String!
+dateTime: String!
+poster: String!
+replies: Comment!
 }
 
 """
 Doplnující informace pro komerční prostory
 """
 type CommercialInfo {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  placementSpecial: [PlacementSpecial!]!
-  roomCount: Int!
-  ceilingHeight: Float!
-  amenities: [Amenity!]
-  usableArea: Float!
-  balconyArea: Float
-  terraceArea: Float
-  loggiaArea: Float
-  cellarArea: Float
-  poolArea: Float
-  constructionYear: Int!
-  acceptanceYear: Int!
-  reconstructionYear: Int
-  type: CommercialType!
-  storeArea: Float
-  officeArea: Float
-  warehouseArea: Float
-  productionArea: Float
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float!
+usableArea: Float!
+constructionYear: Int!
+acceptanceYear: Int!
+reconstructionYear: Int
+type: CommercialType!
+storeArea: Float
+officeArea: Float
+warehouseArea: Float
+productionArea: Float
 }
 
 type Company implements Seller & SellerCorporate {
-  sellerId: ID!
-  listings: [Listing!]!
-  name: String!
-  description: String!
-  photo: Photo!
-  figures: [Figure!]!
-  email: EmailAddress!
-  subordinates: [SellerStructural!]! @loggedIn @auth(level: [COWORKER])
-  headquarters: Address!
-  brokers: [Broker!]!
-  offices: [Office!]!
+sellerId: ID!
+listings: [Listing!]!
+name: String!
+description: String!
+photo: Photo!
+figures: [Figure!]!
+email: EmailAddress!
+headquarters: Address!
+subordinates: [SellerStructural!]! @loggedIn @auth(level: [OWNER,COWORKER])
+brokers: [Broker!]!
+offices: [Office!]!
 }
 
-type CompanyAddBrokerPayload {
-  result: Broker!
+"""
+Výsledek operace přidání prodávajícího.
+"""
+type CompanyAddSellerPayload {
+result: Seller!
 }
 
-type CompanyAddOfficePayload {
-  result: Office!
+"""
+Výsledek operace editace prodávajícího.
+"""
+type CompanyEditSellerPayload {
+subject: Seller!
 }
 
 type CompanyMoveSellerPayload {
-  subject: SellerStructural!
-  oldParentId: ID!
-  newParentId: ID!
+subject: SellerStructural!
+oldParentId: ID!
+newParentId: ID!
 }
 
 type CompanyRemoveSellerPayload {
-  parent: Seller!
+parent: Seller!
 }
 
 """
 Nemovitost - popis nemovitosti
 """
 type Estate {
-  type: EstateType!
-  typeInfo: EstateTypeInfo!
-  address: AddressListing!
-  fullAddress: Address! @auth(level: [OWNER, COWORKER])
-  natureProtection: NatureProtection!
-  electricity: [Electricity!]!
-  gas: [Gas!]!
-  water: [Water!]!
-  heating: [Heating!]!
-  waste: [Waste!]!
-  road: [Road!]!
-  connectivity: [Connectivity!]!
+type: EstateType!
+typeInfo: EstateTypeInfo!
+address: AddressListing!
+fullAddress: Address! @auth(level: [OWNER,COWORKER])
+lawProtection: LawProtection!
+electricity: [Electricity!]!
+gas: [Gas!]!
+water: [Water!]!
+heating: [Heating!]!
+waste: [Waste!]!
+road: [Road!]!
+connectivity: [Connectivity!]!
+}
+
+type EstateTypeStats {
+apartmentCount: Int!
+houseCount: Int!
+landCount: Int!
+garageCount: Int!
+commercialCount: Int!
 }
 
 type FloorPlan implements Figure {
-  figureId: ID!
-  url: Url!
-  size: Int!
+figureId: ID!
+url: Url!
+size: Int!
 }
 
 """
 Doplnující informace pro garáže a ostatní nemovitosti
 """
 type GarageInfo {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  placementSpecial: [PlacementSpecial!]!
-  roomCount: Int!
-  ceilingHeight: Float!
-  amenities: [Amenity!]
-  usableArea: Float!
-  balconyArea: Float
-  terraceArea: Float
-  loggiaArea: Float
-  cellarArea: Float
-  poolArea: Float
-  constructionYear: Int!
-  acceptanceYear: Int!
-  reconstructionYear: Int
-  type: GarageType!
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float!
+usableArea: Float!
+constructionYear: Int!
+acceptanceYear: Int!
+reconstructionYear: Int
+type: GarageType!
 }
 
 """
 Gps type - latitude and longitude.
 """
 type Gps {
-  lat: Float! @floatConstraint(min: -90.0, max: 90.0)
-  lng: Float! @floatConstraint(min: -180.0, max: 180.0)
+lat: Float! @floatConstraint(min: -90.0, max: 90.0)
+lng: Float! @floatConstraint(min: -180.0, max: 180.0)
 }
 
 """
 Doplnující informace pro domy
 """
 type HouseInfo {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  placementSpecial: [PlacementSpecial!]!
-  roomCount: Int!
-  ceilingHeight: Float!
-  amenities: [Amenity!]
-  usableArea: Float!
-  balconyArea: Float
-  terraceArea: Float
-  loggiaArea: Float
-  cellarArea: Float
-  poolArea: Float
-  constructionYear: Int!
-  acceptanceYear: Int!
-  reconstructionYear: Int
-  type: HouseType!
-  landArea: Float!
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float!
+usableArea: Float!
+constructionYear: Int!
+acceptanceYear: Int!
+reconstructionYear: Int
+roomCount: Int!
+balconyArea: Float
+terraceArea: Float
+loggiaArea: Float
+cellarArea: Float
+poolArea: Float
+amenities: [Amenity!]!
+type: HouseType!
+landArea: Float!
 }
 
 type Individual implements Seller {
-  sellerId: ID!
-  listings: [Listing!]!
+sellerId: ID!
+listings: [Listing!]!
 }
 
 """
 Doplnující informace pro pozemky
 """
 type LandInfo {
-  type: LandType!
-  landArea: Float!
+type: LandType!
+landArea: Float!
 }
 
 """
 Výsledek operace přidání FloorPlan k nabídce.
 """
 type ListingAddFloorPlanPayload {
-  subject: Listing!
-  result: FloorPlan!
+subject: Listing!
+result: FloorPlan!
 }
 
 """
 Výsledek operace přidání Matterport k nabídce.
 """
 type ListingAddMatterportPayload {
-  subject: Listing!
-  result: Matterport!
+subject: Listing!
+result: Matterport!
 }
 
 """
 Výsledek operace přidání nabídky.
 """
 type ListingAddPayload {
-  result: Listing!
+result: Listing!
 }
 
 """
 Výsledek operace přidání Photo k nabídce.
 """
 type ListingAddPhotoPayload {
-  subject: Listing!
-  result: Photo!
+subject: Listing!
+result: Photo!
+}
+
+"""
+Výsledek operace přidání nabídky do existujícího projektu.
+"""
+type ListingAddToProjectPayload {
+subject: Project!
+result: ListingSimple!
 }
 
 """
 Výsledek operace přidání Video k nabídce.
 """
 type ListingAddVideoPayload {
-  subject: Listing!
-  result: Video!
+subject: Listing!
+result: Video!
 }
 
 """
 Výsledek operace editace nabídky.
 """
 type ListingEditPayload {
-  subject: Listing!
+subject: Listing!
 }
 
 """
 Výsledek operace přidání Figure do lineární slideshow.
 """
 type ListingLinearSlideshowAddFigurePayload {
-  subject: Figure!
-  newPosition: Int!
+subject: Figure!
+newPosition: Int!
 }
 
 """
 Výsledek operace změny pořadí Figure v lineární slideshow.
 """
 type ListingLinearSlideshowMoveFigurePayload {
-  subject: Figure!
-  oldPosition: Int!
-  newPosition: Int!
+subject: Figure!
+oldPosition: Int!
+newPosition: Int!
 }
 
 """
 Výsledek operace odstranění Figure z lineární slideshow.
 """
 type ListingLinearSlideshowRemoveFigurePayload {
-  subject: Figure!
-  oldPosition: Int!
+subject: Figure!
+oldPosition: Int!
 }
 
 """
 Výsledek operace odstranění Figure.
 """
 type ListingRemoveFigurePayload {
-  parent: Listing!
+parent: Listing!
 }
 
 """
 Výsledek operace změny stavu nabídky.
 """
 type ListingSetStatePayload {
-  subject: Listing!
-  oldState: ListingState!
-  newState: ListingState!
+subject: Listing!
+oldState: ListingState!
+newState: ListingState!
+}
+
+type ListingTypeStats {
+offerCount: Int!
+auctionCount: Int!
+projectCount: Int!
 }
 
 type ListingsPayload {
-  items(
-    sort: ListingSort! = RELEVANCE
-    limit: Int! = 10 @intConstraint(min: 0, max: 1000)
-    offset: Int! = 0 @intConstraint(min: 0)
-  ): [Listing!]!
-  count: Int!
+items(
+sort: ListingSort! = RELEVANCE
+limit: Int! = 10 @intConstraint(min: 0, max: 1000)
+offset: Int! = 0 @intConstraint(min: 0)
+): [Listing!]!
+count: Int!
+estateTypeStats: EstateTypeStats!
+serviceTypeStats: ServiceTypeStats!
+listingTypeStats: ListingTypeStats!
 }
 
 type Location {
-  type: String!
-  viewport: Viewport!
-  region_name: String!
-  district_name: String
-  city_name: String
-  city_part_name: String
-  street_name: String
+type: String!
+viewport: Viewport!
+region_name: String!
+district_name: String
+city_name: String
+city_part_name: String
+street_name: String
 }
 
 type Matterport implements Figure {
-  figureId: ID!
-  url: Url!
+figureId: ID!
+url: Url!
 }
 
 type MoveListingFigurePayload {
-  result: Broker!
+result: Broker!
 }
 
 """
 Root type pro write operace Nemovizor API.
 """
 type Mutation {
-  """
-  Přidání Listing.
-  """
-  listingAdd(input: ListingInput!): ListingAddPayload! @loggedIn
+"""
+Přidání Listing.
 
-  """
-  Změna stavu Listing.
+"""
+listingAdd(
+input: ListingInput!
+): ListingAddPayload! @loggedIn
 
-  - Defaultně je nabídka ve stavu DRAFT, což značí aktivní ale nepublikovanou nabídku.
-  - Publikování inzerátu je změna stavu na ACTIVE, při publikování je provedena kontrola zda jsou vyplněné všechny položky (např. počet fotek).
-  - Odstranění inzerátu je změna stavu na FINISHED nebo CANCELLED.
-  """
-  listingSetState(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    state: ListingState!
-  ): ListingSetStatePayload! @loggedIn
+"""
+Přidání Listing k již existujícímu projektu.
 
-  """
-  Úprava Listing.
-  """
-  listingEdit(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    input: ListingInput!
-  ): ListingEditPayload! @loggedIn
+"""
+listingAddToProject(
+projectId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+input: ListingInput!
+): ListingAddToProjectPayload! @loggedIn
 
-  """
-  Přidání Photo k Listing.
+"""
+Změna stavu Listing.
 
-  - Url fotky musí být url již nahraného souboru na Nemovizor file storage (viz Query::uploadLink).
-  """
-  listingAddPhoto(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    photoUrl: Url!
-  ): ListingAddPhotoPayload! @loggedIn
+- Defaultně je nabídka ve stavu DRAFT, což značí aktivní ale nepublikovanou nabídku.
+- Publikování inzerátu je změna stavu na ACTIVE, při publikování je provedena kontrola zda jsou vyplněné všechny položky (např. počet fotek).
+- Odstranění inzerátu je změna stavu na FINISHED nebo CANCELLED.
+"""
+listingSetState(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+state: ListingState!
+): ListingSetStatePayload! @loggedIn
 
-  """
-  Přidání Video k Listing.
+"""
+Úprava Listing.
 
-  - Url videa musí být url již nahraného souboru na Nemovizor file storage (viz Query::uploadLink).
-  """
-  listingAddVideo(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    videoUrl: Url!
-  ): ListingAddVideoPayload! @loggedIn
+"""
+listingEdit(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+input: ListingInput!
+): ListingEditPayload! @loggedIn
 
-  """
-  Přidání FloorPlan k Listing.
+"""
+Přidání Photo k Listing.
 
-  - Url půdorysu musí být url již nahraného souboru na Nemovizor file storage (viz Query::uploadLink).
-  """
-  listingAddFloorPlan(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    floorPlanUrl: Url!
-  ): ListingAddFloorPlanPayload! @loggedIn
+- Url fotky musí být url již nahraného souboru na Nemovizor file storage (viz Query::uploadLink).
+"""
+listingAddPhoto(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+photoUrl: Url!
+): ListingAddPhotoPayload! @loggedIn
 
-  """
-  Přidání Matterport k Listing.
+"""
+Přidání Video k Listing.
 
-  - Url prohlídky může být libovolná url s dostupnou prohlídkou.
-  """
-  listingAddMatterport(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    matterportUrl: Url!
-  ): ListingAddMatterportPayload! @loggedIn
+- Url videa musí být url již nahraného souboru na Nemovizor file storage (viz Query::uploadLink).
+"""
+listingAddVideo(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+videoUrl: Url!
+): ListingAddVideoPayload! @loggedIn
 
-  """
-  Odstranění Figure z inzerátu.
-  """
-  listingRemoveFigure(
-    figureId: ID!
-      @possibleTypes(
-        abstractType: "Figure"
-        concreteTypes: ["Photo", "Video", "FloorPlan", "Matterport"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-  ): ListingRemoveFigurePayload! @loggedIn
+"""
+Přidání FloorPlan k Listing.
 
-  """
-  Přidá Figure do lineární slideshow.
+- Url půdorysu musí být url již nahraného souboru na Nemovizor file storage (viz Query::uploadLink).
+"""
+listingAddFloorPlan(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+floorPlanUrl: Url!
+): ListingAddFloorPlanPayload! @loggedIn
 
-  - Pokud není nastaven argument position, pak je Figure vložena na konec.
-  - Vyhodí error pokud Figure v lineární slideshow již existuje.
-  - Vyhodí error pokud position je větší než počet fotek v lineání slideshow.
-  """
-  listingLinearSlideshowAddFigure(
-    figureId: ID!
-      @possibleTypes(
-        abstractType: "Figure"
-        concreteTypes: ["Photo", "Video", "FloorPlan", "Matterport"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    position: Int = null @intConstraint(min: 0)
-  ): ListingLinearSlideshowAddFigurePayload! @loggedIn
+"""
+Přidání Matterport k Listing.
 
-  """
-  Změní pořadí Figure v lineární slideshow.
+- Url prohlídky může být libovolná url s dostupnou prohlídkou.
+"""
+listingAddMatterport(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,SUPERVISOR])
+matterportUrl: Url!
+): ListingAddMatterportPayload! @loggedIn
 
-  - Vyhodí error pokud position je větší než počet fotek v lineání slideshow.
-  """
-  listingLinearSlideshowMoveFigure(
-    figureId: ID!
-      @possibleTypes(
-        abstractType: "Figure"
-        concreteTypes: ["Photo", "Video", "FloorPlan", "Matterport"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-    position: Int! @intConstraint(min: 0)
-  ): ListingLinearSlideshowMoveFigurePayload! @loggedIn
+"""
+Odstranění Figure z inzerátu.
 
-  """
-  Odstraní Figure z lineární slideshow.
+"""
+listingRemoveFigure(
+figureId: ID! @possibleTypes(abstractType: "Figure", concreteTypes: ["Photo","Video","FloorPlan","Matterport"]) @auth(level: [OWNER,SUPERVISOR])
+): ListingRemoveFigurePayload! @loggedIn
 
-  - Figure zůstane stále dostupná v klasické slideshow.
-  """
-  listingLinearSlideshowRemoveFigure(
-    figureId: ID!
-      @possibleTypes(
-        abstractType: "Figure"
-        concreteTypes: ["Photo", "Video", "FloorPlan", "Matterport"]
-      )
-      @auth(level: [OWNER, SUPERVISOR])
-  ): ListingLinearSlideshowRemoveFigurePayload! @loggedIn
+"""
+Přidá Figure do lineární slideshow.
 
-  """
-  Přidání nového makléře
-  """
-  companyAddBroker(input: CompanyAddBrokerInput!): CompanyAddBrokerPayload!
-    @loggedIn
+- Pokud není nastaven argument position, pak je Figure vložena na konec.
+- Vyhodí error pokud Figure v lineární slideshow již existuje.
+- Vyhodí error pokud position je větší než počet fotek v lineání slideshow.
+"""
+listingLinearSlideshowAddFigure(
+figureId: ID! @possibleTypes(abstractType: "Figure", concreteTypes: ["Photo","Video","FloorPlan","Matterport"]) @auth(level: [OWNER,SUPERVISOR])
+position: Int = null @intConstraint(min: 0)
+): ListingLinearSlideshowAddFigurePayload! @loggedIn
 
-  """
-  Přidání nové pobočky
-  """
-  companyAddOffice(input: CompanyAddOfficeInput!): CompanyAddOfficePayload!
-    @loggedIn
+"""
+Změní pořadí Figure v lineární slideshow.
 
-  """
-  Přesun prodejce ve struktuře společnosti
-  """
-  companyMoveSeller(
-    sellerId: ID!
-      @possibleTypes(
-        abstractType: "SellerStructural"
-        concreteTypes: ["Office", "Broker"]
-      )
-    parentId: ID!
-      @possibleTypes(
-        abstractType: "SellerCorporate"
-        concreteTypes: ["Company", "Office", "Broker"]
-      )
-  ): CompanyMoveSellerPayload! @loggedIn
+- Vyhodí error pokud position je větší než počet fotek v lineání slideshow.
+"""
+listingLinearSlideshowMoveFigure(
+figureId: ID! @possibleTypes(abstractType: "Figure", concreteTypes: ["Photo","Video","FloorPlan","Matterport"]) @auth(level: [OWNER,SUPERVISOR])
+position: Int! @intConstraint(min: 0)
+): ListingLinearSlideshowMoveFigurePayload! @loggedIn
 
-  """
-  Odstranění prodejce ze společnosti
+"""
+Odstraní Figure z lineární slideshow.
 
-  Převede všechny nabídky a podřízené na nadřízeného ve struktuře.
-  """
-  companyRemoveSeller(
-    sellerId: ID!
-      @possibleTypes(
-        abstractType: "SellerStructural"
-        concreteTypes: ["Office", "Broker"]
-      )
-      @auth(level: [SUPERVISOR])
-  ): CompanyRemoveSellerPayload! @loggedIn
+- Figure zůstane stále dostupná v klasické slideshow.
+"""
+listingLinearSlideshowRemoveFigure(
+figureId: ID! @possibleTypes(abstractType: "Figure", concreteTypes: ["Photo","Video","FloorPlan","Matterport"]) @auth(level: [OWNER,SUPERVISOR])
+): ListingLinearSlideshowRemoveFigurePayload! @loggedIn
 
-  companyProfileEdit(
-    input: SetCompanyProfileDetailsInput!
-  ): SetCompanyProfileDetailsPayload! @deprecated(reason: "Work in progress")
-  officeProfileEdit(
-    input: SetOfficeProfileDetailsInput!
-  ): SetOfficeProfileDetailsPayload! @deprecated(reason: "Work in progress")
-  brokerProfileEdit(
-    input: SetBrokerProfileDetailsInput!
-  ): SetBrokerProfileDetailsPayload! @deprecated(reason: "Work in progress")
-  sellerProfileSetPhoto(sellerId: ID!): SetBrokerProfilePhotoPayload!
-    @deprecated(reason: "Work in progress")
+"""
+Přidání nového prodávajícího do společnosti
+
+"""
+companyAddSeller(
+input: SellerInput!
+parentId: ID! @possibleTypes(abstractType: "SellerCorporate", concreteTypes: ["Company","Office","Broker"]) @auth(level: [OWNER,COWORKER])
+): CompanyAddSellerPayload! @loggedIn
+
+"""
+Úprava základních informací prodávajícího
+
+"""
+companyEditSeller(
+sellerId: ID @possibleTypes(abstractType: "SellerCorporate", concreteTypes: ["Company","Office","Broker"]) @auth(level: [SUPERVISOR])
+input: SellerInput!
+): CompanyEditSellerPayload! @loggedIn
+
+"""
+Přesun prodejce ve struktuře společnosti
+
+"""
+companyMoveSeller(
+sellerId: ID! @possibleTypes(abstractType: "SellerStructural", concreteTypes: ["Office","Broker"]) @auth(level: [OWNER,SUPERVISOR])
+parentId: ID! @possibleTypes(abstractType: "SellerCorporate", concreteTypes: ["Company","Office","Broker"]) @auth(level: [OWNER,COWORKER])
+): CompanyMoveSellerPayload! @loggedIn
+
+"""
+Odstranění prodejce ze společnosti
+
+Převede všechny nabídky a podřízené na nadřízeného ve struktuře.
+"""
+companyRemoveSeller(
+sellerId: ID! @possibleTypes(abstractType: "SellerStructural", concreteTypes: ["Office","Broker"]) @auth(level: [SUPERVISOR])
+): CompanyRemoveSellerPayload! @loggedIn
+
+"""
+Vygenerování příhlašovacích údajů pro sreality můstek
+
+Pokud již přihlašovací údaje pro sellera existují, jsou nahrazeny novými.
+"""
+sellerGenerateAdapterAccess(
+sellerId: ID! @possibleTypes(abstractType: "SellerCorporate", concreteTypes: ["Company","Office","Broker"]) @auth(level: [OWNER])
+): SellerGenerateAdapterAccessPayload! @loggedIn
+
+"""
+Deaktivování příhlašovacích údajů pro sreality můstek
+
+"""
+sellerDisableAdapterAccess(
+sellerId: ID! @possibleTypes(abstractType: "SellerCorporate", concreteTypes: ["Company","Office","Broker"]) @auth(level: [OWNER])
+): SellerDisableAdapterAccessPayload! @loggedIn
 }
 
 """
 Standardní nabídka
 """
 type Offer implements Listing & ListingSimple {
-  listingId: ID!
-  customId: ID
-  state: ListingState!
-  url: Url!
-  title(lang: Language! = CS): String
-  description(lang: Language! = CS): String
-  seller: Seller!
-  slideshow(linear: Boolean = false): [Slide!]!
-  photos: [Photo!]!
-  videos: [Video!]!
-  floorPlans: [FloorPlan!]!
-  matterport: Matterport
-  comments: [Comment!]!
-  created: DateTime! @auth(level: [OWNER, COWORKER])
-  published: DateTime
-  closed: DateTime @auth(level: [OWNER, COWORKER])
-  estate: Estate!
-  serviceType: ServiceType!
-  serviceTypeInfo: ServiceTypeInfo!
-  price: Price!
+listingId: ID!
+customId: ID
+state: ListingState!
+url: Url!
+title(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+description(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+seller: Seller!
+slideshow(
+linear: Boolean = false
+): [Slide!]!
+photos: [Photo!]!
+videos: [Video!]!
+floorPlans: [FloorPlan!]!
+matterport: Matterport
+comments: [Comment!]!
+created: DateTime! @auth(level: [OWNER,COWORKER])
+published: DateTime
+modified: DateTime! @auth(level: [OWNER,COWORKER])
+closed: DateTime @auth(level: [OWNER,COWORKER])
+estate: Estate!
+serviceType: ServiceType!
+serviceTypeInfo: ServiceTypeInfo!
+price: Price!
 }
 
 type Office implements Seller & SellerCorporate & SellerStructural {
-  sellerId: ID!
-  listings: [Listing!]!
-  name: String!
-  description: String!
-  photo: Photo!
-  figures: [Figure!]!
-  email: EmailAddress!
-  subordinates: [SellerStructural!]! @loggedIn @auth(level: [COWORKER])
-  supervisor: SellerCorporate! @loggedIn @auth(level: [COWORKER])
-  headquarters: Address!
-  company: Company!
+sellerId: ID!
+listings: [Listing!]!
+name: String!
+description: String!
+photo: Photo!
+figures: [Figure!]!
+email: EmailAddress!
+subordinates: [SellerStructural!]! @loggedIn @auth(level: [OWNER,COWORKER])
+supervisor: SellerCorporate! @loggedIn @auth(level: [OWNER,COWORKER])
+headquarters: Address!
+company: Company!
 }
 
 type Photo implements Figure {
-  figureId: ID!
-  url: Url!
-  originalUrl: Url!
-  is360: Boolean!
-  width: Int!
-  height: Int!
-  size: Int!
+figureId: ID!
+url: Url!
+originalUrl: Url!
+is360: Boolean!
+width: Int!
+height: Int!
+size: Int!
 }
 
 type PointBlurred implements Point & PointListing {
-  gps: Gps!
-  listingId: ID!
+gps: Gps!
+listingId: ID!
 }
 
 type PointProject implements Point & PointListing {
-  gps: Gps!
-  listingId: ID!
-  count: Int!
+gps: Gps!
+listingId: ID!
+count: Int!
 }
 
 type PointSimple implements Point & PointListing {
-  gps: Gps!
-  listingId: ID!
+gps: Gps!
+listingId: ID!
 }
 
 """
 Cena - informace o ceně
 """
 type Price {
-  value(currency: Currency! = CZK): Float!
-  originalCurrency: Currency!
-  unit: PriceUnit!
-  period: PricePeriod!
+value(
+currency: Currency! = CZK
+): Float!
+originalCurrency: Currency!
+unit: PriceUnit!
+period: PricePeriod!
 }
 
 type Project implements Listing {
-  listingId: ID!
-  customId: ID
-  state: ListingState!
-  url: Url!
-  title(lang: Language! = CS): String
-  description(lang: Language! = CS): String
-  seller: Seller!
-  slideshow(linear: Boolean = false): [Slide!]!
-  photos: [Photo!]!
-  videos: [Video!]!
-  floorPlans: [FloorPlan!]!
-  matterport: Matterport
-  comments: [Comment!]!
-  created: DateTime! @auth(level: [OWNER, COWORKER])
-  published: DateTime
-  closed: DateTime @auth(level: [OWNER, COWORKER])
-  listings: [ProjectListing!]!
-  listingCount: Int!
+listingId: ID!
+customId: ID
+state: ListingState!
+url: Url!
+title(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+description(
+lang: Language! = CS
+): String @notNullForArg(name: "lang", equals: "CS")
+seller: Seller!
+slideshow(
+linear: Boolean = false
+): [Slide!]!
+photos: [Photo!]!
+videos: [Video!]!
+floorPlans: [FloorPlan!]!
+matterport: Matterport
+comments: [Comment!]!
+created: DateTime! @auth(level: [OWNER,COWORKER])
+published: DateTime
+modified: DateTime! @auth(level: [OWNER,COWORKER])
+closed: DateTime @auth(level: [OWNER,COWORKER])
+listings: ProjectListingPayload!
 }
 
 type ProjectListing {
-  listing: ListingSimple!
-  satisfiesFilter: Boolean!
+listing: ListingSimple!
+satisfiesFilter: Boolean!
+}
+
+type ProjectListingPayload {
+items(
+sort: ListingSort! = CHEAPEST
+limit: Int! = 10 @intConstraint(min: 0, max: 1000)
+offset: Int! = 0 @intConstraint(min: 0)
+): [ProjectListing!]!
+count: Int!
+estateTypeStats: EstateTypeStats!
+serviceTypeStats: ServiceTypeStats!
+listingTypeStats: ListingTypeStats!
 }
 
 """
 Root type pro read operace nemovizor API.
 """
 type Query {
-  """
-  Vyhledávání v obsahu nemovizoru
-  """
-  search(value: String!): [SearchResult!]!
+"""
+Vyhledávání v obsahu nemovizoru
 
-  """
-  Vyhledání inzerátu dle ID
+"""
+search(
+value: String!
+): [SearchResult!]!
 
-  Vrací null pokud inzerát neexistuje nebo pokud klient nemá práva na jeho zobrazení.
-  """
-  listing(
-    listingId: ID!
-      @possibleTypes(
-        abstractType: "Listing"
-        concreteTypes: ["Offer", "Auction", "Project"]
-      )
-      @auth(level: [PUBLIC, OWNER, COWORKER])
-  ): Listing!
+"""
+Vyhledání inzerátu dle ID
 
-  """
-  Vyhledávání mezi inzeráty
-  """
-  listings(
-    filter: ListingFilter! = {
-      listingType: null
-      serviceType: null
-      estateType: null
-      price: null
-      location: null
-      features: null
-      amenities: null
-      usableArea: null
-      landArea: null
-      constructionYear: null
-    }
-  ): ListingsPayload!
+"""
+listing(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [PUBLIC,OWNER,COWORKER])
+): Listing!
 
-  """
-  Body na mapě, pro daný filtr a viewport
-  """
-  points(
-    filter: ListingFilter! = {
-      listingType: null
-      serviceType: null
-      estateType: null
-      price: null
-      location: null
-      features: null
-      amenities: null
-      usableArea: null
-      landArea: null
-      constructionYear: null
-    }
-  ): [Point!]!
+"""
+Vyhledávání mezi inzeráty
 
-  """
-  Vyhledání prodávájícího dle ID
+"""
+listings(
+filter: ListingFilter! = {listingType:null,serviceType:null,estateType:null,price:null,location:null,features:null,amenities:null,usableArea:null,landArea:null,constructionYear:null}
+): ListingsPayload!
 
-  Vrací null pokud prodávající neexistuje nebo pokud klient nemá práva na jeho zobrazení.
-  """
-  seller(
-    sellerId: ID!
-      @possibleTypes(
-        abstractType: "Seller"
-        concreteTypes: ["Company", "Office", "Broker", "Individual"]
-      )
-  ): Seller!
+"""
+Body na mapě, pro daný filtr a viewport
 
-  """
-  Seznam makléřů kteří inzerují na Nemovizor.cz
-  """
-  brokers: [Broker!]!
+"""
+points(
+filter: ListingFilter! = {listingType:null,serviceType:null,estateType:null,price:null,location:null,features:null,amenities:null,usableArea:null,landArea:null,constructionYear:null}
+): [Point!]!
 
-  """
-  Seznam firem kteří inzerují na Nemovizor.cz
-  """
-  companies: [Company!]!
+"""
+Vyhledání prodávájícího dle ID
 
-  """
-  Aktuálně přihlášený uživatel
-  """
-  viewer: Viewer! @loggedIn
+Vrací null pokud prodávající neexistuje nebo pokud klient nemá práva na jeho zobrazení.
+"""
+seller(
+sellerId: ID! @possibleTypes(abstractType: "Seller", concreteTypes: ["Company","Office","Broker","Individual"])
+): Seller!
 
-  """
-  Vytvoří link pro upload souboru
-  """
-  uploadLink: Url! @loggedIn
+"""
+Seznam makléřů kteří inzerují na Nemovizor.cz
+
+"""
+brokers: [Broker!]!
+
+"""
+Seznam firem kteří inzerují na Nemovizor.cz
+
+"""
+companies: [Company!]!
+
+"""
+Aktuálně přihlášený uživatel
+
+"""
+viewer: Viewer! @loggedIn
+
+"""
+Vytvoří link pro upload souboru
+
+"""
+uploadLink: Url! @loggedIn
 }
 
 """
 Doplnující informace pro pronájem
 """
 type RentInfo {
-  restriction: [Restriction!]!
+restriction: [Restriction!]!
+}
+
+type SellerDisableAdapterAccessPayload {
+success: Boolean! @deprecated(reason: "This field is redundant and may be replaced with more usable information.")
+}
+
+type SellerGenerateAdapterAccessPayload {
+result: AdapterAccess!
+}
+
+type ServiceTypeStats {
+rentCount: Int!
+transferCount: Int!
 }
 
 type SetBrokerProfileDetailsPayload {
-  result: Broker!
+result: Broker!
 }
 
 type SetBrokerProfilePhotoPayload {
-  result: Broker!
+result: Broker!
 }
 
 type SetCompanyProfileDetailsPayload {
-  result: Company!
+result: Company!
 }
 
 type SetOfficeProfileDetailsPayload {
-  result: Office!
+result: Office!
 }
 
 type SlideDouble implements Slide {
-  index: Int! @intConstraint(min: 0)
-  layout: SlideLayout!
-  itemOne: Figure!
-  itemTwo: Figure!
+index: Int! @intConstraint(min: 0)
+layout: SlideLayout!
+itemOne: Figure!
+itemTwo: Figure!
 }
 
 type SlideSingle implements Slide {
-  index: Int! @intConstraint(min: 0)
-  item: Figure!
+index: Int! @intConstraint(min: 0)
+item: Figure!
 }
 
 type SlideTriple implements Slide {
-  index: Int! @intConstraint(min: 0)
-  layout: SlideLayout!
-  itemOne: Figure!
-  itemTwo: Figure!
-  itemThree: Figure!
+index: Int! @intConstraint(min: 0)
+layout: SlideLayout!
+itemOne: Figure!
+itemTwo: Figure!
+itemThree: Figure!
 }
 
 """
 Doplnující informace pro prodej
 """
 type TransferInfo {
-  withCompany: Boolean!
+withCompany: Boolean!
 }
 
 type Video implements Figure {
-  figureId: ID!
-  url: Url!
-  size: Int!
+figureId: ID!
+url: Url!
+size: Int!
+length: Int!
 }
 
 """
 Aktuální uživatel - informace o aktuálním uživateli nemovizoru.
 """
 type Viewer {
-  email: EmailAddress!
-  sellers: [ViewerSeller!]!
+email: EmailAddress!
+
+"""
+Vyhledání prodávajícího dle ID.
+
+"""
+seller(
+sellerId: ID! @possibleTypes(abstractType: "Seller", concreteTypes: ["Company","Office","Broker","Individual"]) @auth(level: [OWNER])
+): ViewerSeller!
+
+"""
+Vyhledání prodávajícího dle custom ID.
+
+"""
+sellerByCustomId(
+customId: ID!
+): ViewerSeller!
+
+"""
+Seznam prodávajících aktuálního uživatele.
+
+"""
+sellers: [ViewerSeller!]!
 }
 
 """
-Seller registrovaný k aktuálnímu uživateli.
+Root type pro read operace nemovizor API, s přístupem pro aktuálně přihlášeného uživatele.
 """
 type ViewerSeller {
-  seller: Seller!
-  listings: [Listing!]!
-  wallet: [Wallet!]!
+"""
+Aktuální prodávající.
+
+"""
+seller: Seller!
+
+"""
+Vyhledání inzerátu dle ID.
+
+"""
+listing(
+listingId: ID! @possibleTypes(abstractType: "Listing", concreteTypes: ["Offer","Auction","Project"]) @auth(level: [OWNER,COWORKER])
+): Listing!
+
+"""
+Vyhledání inzerátu dle custom ID.
+
+"""
+listingByCustomId(
+customId: ID!
+): Listing!
+
+"""
+Seznam inzerátů aktuálního prodávajícího.
+
+"""
+listings(
+filter: ListingFilter! = {listingType:null,serviceType:null,estateType:null,price:null,location:null,features:null,amenities:null,usableArea:null,landArea:null,constructionYear:null}
+): ListingsPayload!
+
+wallet: [Wallet!]!
+adapterAccess: AdapterAccess
 }
 
 type Viewport {
-  top_left: Gps!
-  bottom_right: Gps!
+top_left: Gps!
+bottom_right: Gps!
 }
 
 """
 Peněženka - aktuální stav peněženky.
 """
 type Wallet {
-  value: Boolean!
-  upcomingCharge: Boolean!
-  history: Boolean!
+value: Boolean!
+upcomingCharge: Boolean!
+history: Boolean!
 }
 
 """
 Doplnující informace podle typu nemovitosti
 """
-union EstateTypeInfo =
-    ApartmentInfo
-  | HouseInfo
-  | LandInfo
-  | CommercialInfo
-  | GarageInfo
+union EstateTypeInfo = ApartmentInfo | HouseInfo | LandInfo | CommercialInfo | GarageInfo
 
-union SearchResult =
-    Offer
-  | Auction
-  | Project
-  | Broker
-  | Office
-  | Company
-  | Location
+union SearchResult = Offer | Auction | Project | Broker | Office | Company | Location
 
 """
 Doplnující informace podle typu služby (prodej/pronájem)
@@ -1001,269 +1078,241 @@ Doplnující informace podle typu služby (prodej/pronájem)
 union ServiceTypeInfo = TransferInfo | RentInfo
 
 input AddressRuianInput {
-  ruianCode: Int! @intConstraint(min: 0)
-  blur: AddressBlur!
+ruianCode: Int! @intConstraint(min: 0)
+blur: AddressBlur!
 }
 
 input AmenitiesFilter {
-  dishwasher: Boolean = null
+dishwasher: Boolean = null
 }
 
 input ApartmentInput {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  roomCount: Int! @intConstraint(min: 0)
-  ceilingHeight: Float! @floatConstraint(min: 0.0)
-  usableArea: Float! @floatConstraint(min: 0.0)
-  balconyArea: Float @floatConstraint(min: 0.0)
-  terraceArea: Float @floatConstraint(min: 0.0)
-  loggiaArea: Float @floatConstraint(min: 0.0)
-  cellarArea: Float @floatConstraint(min: 0.0)
-  poolArea: Float @floatConstraint(min: 0.0)
-  constructionYear: Int! @intConstraint(max: 2021)
-  acceptanceYear: Int! @intConstraint(max: 2021)
-  reconstructionYear: Int @intConstraint(max: 2021)
-  type: ApartmentType!
-  apartmentNumber: String!
-  floorNumber: Int!
-  specialClass: [ApartmentSpecialType!]
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float! @floatConstraint(min: 0.0)
+usableArea: Float! @floatConstraint(min: 0.0)
+constructionYear: Int! @intConstraint(max: 2021)
+acceptanceYear: Int! @intConstraint(max: 2021)
+reconstructionYear: Int @intConstraint(max: 2021)
+roomCount: Int! @intConstraint(min: 0)
+balconyArea: Float @floatConstraint(min: 0.0)
+terraceArea: Float @floatConstraint(min: 0.0)
+loggiaArea: Float @floatConstraint(min: 0.0)
+cellarArea: Float @floatConstraint(min: 0.0)
+poolArea: Float @floatConstraint(min: 0.0)
+type: ApartmentType!
+apartmentNumber: String!
+floorNumber: Int!
+specialClass: [ApartmentSpecialType!]!
 }
 
-input AuctionInput @objectConstraint(exactlyOne: ["rent", "transfer"]) {
-  estate: EstateInput!
-  startingPrice: PriceInput!
-  rent: RentInput = null
-  transfer: TransferInput = null
+input AuctionInput @objectConstraint(exactlyOne: ["rent","transfer"]) {
+estate: EstateInput!
+startingPrice: PriceInput!
+rent: RentInput = null
+transfer: TransferInput = null
+}
+
+input BrokerInput {
+name: String!
+email: String!
 }
 
 input CommentInput {
-  tba: Int
+tba: Int
 }
 
 input CommercialInput {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  roomCount: Int! @intConstraint(min: 0)
-  ceilingHeight: Float! @floatConstraint(min: 0.0)
-  usableArea: Float! @floatConstraint(min: 0.0)
-  balconyArea: Float @floatConstraint(min: 0.0)
-  terraceArea: Float @floatConstraint(min: 0.0)
-  loggiaArea: Float @floatConstraint(min: 0.0)
-  cellarArea: Float @floatConstraint(min: 0.0)
-  poolArea: Float @floatConstraint(min: 0.0)
-  constructionYear: Int! @intConstraint(max: 2021)
-  acceptanceYear: Int! @intConstraint(max: 2021)
-  reconstructionYear: Int @intConstraint(max: 2021)
-  type: CommercialType!
-  storeArea: Float
-  officeArea: Float
-  warehouseArea: Float
-  productionArea: Float
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float! @floatConstraint(min: 0.0)
+usableArea: Float! @floatConstraint(min: 0.0)
+constructionYear: Int! @intConstraint(max: 2021)
+acceptanceYear: Int! @intConstraint(max: 2021)
+reconstructionYear: Int @intConstraint(max: 2021)
+type: CommercialType!
+storeArea: Float
+officeArea: Float
+warehouseArea: Float
+productionArea: Float
 }
 
-input CompanyAddBrokerInput {
-  parentId: ID!
-  name: String!
-  email: String!
-}
-
-input CompanyAddOfficeInput {
-  parentId: ID!
-  name: String!
-  headquarters: AddressRuianInput!
-}
-
-input EstateInput
-  @objectConstraint(
-    exactlyOne: ["apartment", "house", "land", "commercial", "garage"]
-  ) {
-  address: AddressRuianInput!
-  electricity: [Electricity!]! @listConstraint(unique: true)
-  gas: [Gas!]! @listConstraint(unique: true)
-  water: [Water!]! @listConstraint(unique: true)
-  heating: [Heating!]! @listConstraint(unique: true)
-  waste: [Waste!]! @listConstraint(unique: true)
-  road: [Road!]! @listConstraint(unique: true)
-  connectivity: [Connectivity!]! @listConstraint(unique: true)
-  natureProtection: NatureProtection!
-  apartment: ApartmentInput
-  house: HouseInput
-  land: LandInput
-  commercial: CommercialInput
-  garage: GarageInput
+input EstateInput @objectConstraint(exactlyOne: ["apartment","house","land","commercial","garage"]) {
+address: AddressRuianInput!
+electricity: [Electricity!]! @listConstraint(unique: true)
+gas: [Gas!]! @listConstraint(unique: true)
+water: [Water!]! @listConstraint(unique: true)
+heating: [Heating!]! @listConstraint(unique: true)
+waste: [Waste!]! @listConstraint(unique: true)
+road: [Road!]! @listConstraint(unique: true)
+connectivity: [Connectivity!]! @listConstraint(unique: true)
+lawProtection: LawProtection!
+apartment: ApartmentInput
+house: HouseInput
+land: LandInput
+commercial: CommercialInput
+garage: GarageInput
 }
 
 input EstateTypeFilter {
-  main: [EstateType!]! = [APARTMENT, HOUSE, COMMERCIAL, LAND, GARAGE]
-  apartmentTypes: [ApartmentType!] = null
-  houseTypes: [HouseType!] = null
-  landTypes: [LandType!] = null
-  commercialTypes: [CommercialType!] = null
-  garageTypes: [GarageType!] = null
+main: [EstateType!]! = [APARTMENT,HOUSE,COMMERCIAL,LAND,GARAGE]
+apartmentTypes: [ApartmentType!] = null
+houseTypes: [HouseType!] = null
+landTypes: [LandType!] = null
+commercialTypes: [CommercialType!] = null
+garageTypes: [GarageType!] = null
 }
 
 input FeaturesFilter {
-  balcony: Boolean = null
-  terrace: Boolean = null
-  loggia: Boolean = null
-  cellar: Boolean = null
-  pool: Boolean = null
+balcony: Boolean = null
+terrace: Boolean = null
+loggia: Boolean = null
+cellar: Boolean = null
+pool: Boolean = null
 }
 
 input GarageInput {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  roomCount: Int! @intConstraint(min: 0)
-  ceilingHeight: Float! @floatConstraint(min: 0.0)
-  usableArea: Float! @floatConstraint(min: 0.0)
-  balconyArea: Float @floatConstraint(min: 0.0)
-  terraceArea: Float @floatConstraint(min: 0.0)
-  loggiaArea: Float @floatConstraint(min: 0.0)
-  cellarArea: Float @floatConstraint(min: 0.0)
-  poolArea: Float @floatConstraint(min: 0.0)
-  constructionYear: Int! @intConstraint(max: 2021)
-  acceptanceYear: Int! @intConstraint(max: 2021)
-  reconstructionYear: Int @intConstraint(max: 2021)
-  type: GarageType!
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float! @floatConstraint(min: 0.0)
+usableArea: Float! @floatConstraint(min: 0.0)
+constructionYear: Int! @intConstraint(max: 2021)
+acceptanceYear: Int! @intConstraint(max: 2021)
+reconstructionYear: Int @intConstraint(max: 2021)
+type: GarageType!
 }
 
 """
 Gps input - input for the GPS.
 """
 input GpsInput {
-  lat: Float! @floatConstraint(min: -90.0, max: 90.0)
-  lng: Float! @floatConstraint(min: -180.0, max: 180.0)
+lat: Float! @floatConstraint(min: -90.0, max: 90.0)
+lng: Float! @floatConstraint(min: -180.0, max: 180.0)
 }
 
 input HouseInput {
-  energyEfficiency: EnergyEfficiency!
-  energyCertificate: EnergyCertificate!
-  condition: Condition!
-  material: Material!
-  placement: Placement!
-  roomCount: Int! @intConstraint(min: 0)
-  ceilingHeight: Float! @floatConstraint(min: 0.0)
-  usableArea: Float! @floatConstraint(min: 0.0)
-  balconyArea: Float @floatConstraint(min: 0.0)
-  terraceArea: Float @floatConstraint(min: 0.0)
-  loggiaArea: Float @floatConstraint(min: 0.0)
-  cellarArea: Float @floatConstraint(min: 0.0)
-  poolArea: Float @floatConstraint(min: 0.0)
-  constructionYear: Int! @intConstraint(max: 2021)
-  acceptanceYear: Int! @intConstraint(max: 2021)
-  reconstructionYear: Int @intConstraint(max: 2021)
-  type: HouseType!
-  landArea: Float! @floatConstraint(min: 0.0)
+energyEfficiency: EnergyEfficiency!
+energyCertificate: EnergyCertificate!
+condition: Condition!
+material: Material!
+placement: Placement!
+placementSpecial: [PlacementSpecial!]!
+ceilingHeight: Float! @floatConstraint(min: 0.0)
+usableArea: Float! @floatConstraint(min: 0.0)
+constructionYear: Int! @intConstraint(max: 2021)
+acceptanceYear: Int! @intConstraint(max: 2021)
+reconstructionYear: Int @intConstraint(max: 2021)
+roomCount: Int! @intConstraint(min: 0)
+balconyArea: Float @floatConstraint(min: 0.0)
+terraceArea: Float @floatConstraint(min: 0.0)
+loggiaArea: Float @floatConstraint(min: 0.0)
+cellarArea: Float @floatConstraint(min: 0.0)
+poolArea: Float @floatConstraint(min: 0.0)
+type: HouseType!
+landArea: Float! @floatConstraint(min: 0.0)
 }
 
 input IndividualInput {
-  email: String
+email: String
 }
 
 input IntRange {
-  greaterThan: Int = null
-  lessThan: Int = null
+greaterThan: Int = null
+lessThan: Int = null
 }
 
 input LandInput {
-  type: LandType!
-  landArea: Float! @floatConstraint(min: 0.0)
+type: LandType!
+landArea: Float! @floatConstraint(min: 0.0)
 }
 
 input ListConstraintInput {
-  minItems: Int @intConstraint(min: 0)
-  maxItems: Int @intConstraint(min: 0)
-  unique: Boolean! = false
-  innerList: ListConstraintInput
+minItems: Int @intConstraint(min: 0)
+maxItems: Int @intConstraint(min: 0)
+unique: Boolean! = false
+innerList: ListConstraintInput
 }
 
 input ListingFilter {
-  listingType: [ListingType!] = null
-  serviceType: [ServiceType!] = null
-  estateType: EstateTypeFilter = null
-  price: IntRange = null
-  location: LocationFilter = null
-  features: FeaturesFilter = null
-  amenities: AmenitiesFilter = null
-  usableArea: IntRange = null
-  landArea: IntRange = null
-  constructionYear: IntRange = null
+listingType: [ListingType!] = null
+serviceType: [ServiceType!] = null
+estateType: EstateTypeFilter = null
+price: IntRange = null
+location: LocationFilter = null
+features: FeaturesFilter = null
+amenities: AmenitiesFilter = null
+usableArea: IntRange = null
+landArea: IntRange = null
+constructionYear: IntRange = null
 }
 
-input ListingInput
-  @objectConstraint(exactlyOne: ["offer", "auction", "project"]) {
-  customId: String = null @stringConstraint(minLength: 1, maxLength: 50)
-  localizations: [LocalizationInput!]! @listConstraint(minItems: 1)
-  sellerId: ID!
-    @possibleTypes(
-      abstractType: "Seller"
-      concreteTypes: ["Company", "Office", "Broker", "Individual"]
-    )
-    @auth(level: [OWNER, COWORKER])
-  offer: OfferInput = null
-  auction: AuctionInput = null
-  project: ProjectInput = null
+input ListingInput @objectConstraint(exactlyOne: ["offer","auction","project"]) {
+customId: String = null @stringConstraint(minLength: 1, maxLength: 50)
+localizations: [LocalizationInput!]! @listConstraint(minItems: 1)
+sellerId: ID! @possibleTypes(abstractType: "Seller", concreteTypes: ["Company","Office","Broker","Individual"]) @auth(level: [OWNER,COWORKER])
+offer: OfferInput = null
+auction: AuctionInput = null
+project: ProjectInput = null
 }
 
 input LocalizationInput {
-  language: Language!
-  title: String! @stringConstraint(minLength: 10, maxLength: 50)
-  description: String! @stringConstraint(minLength: 50, maxLength: 5000)
+language: Language!
+title: String! @stringConstraint(minLength: 10, maxLength: 50)
+description: String! @stringConstraint(minLength: 50, maxLength: 5000)
 }
 
 input LocationFilter {
-  topLeft: GpsInput!
-  bottomRight: GpsInput!
+topLeft: GpsInput!
+bottomRight: GpsInput!
 }
 
-input OfferInput @objectConstraint(exactlyOne: ["rent", "transfer"]) {
-  estate: EstateInput!
-  price: PriceInput!
-  rent: RentInput = null
-  transfer: TransferInput = null
+input OfferInput @objectConstraint(exactlyOne: ["rent","transfer"]) {
+estate: EstateInput!
+price: PriceInput!
+rent: RentInput = null
+transfer: TransferInput = null
+}
+
+input OfficeInput {
+name: String!
+headquarters: AddressRuianInput!
 }
 
 input PriceInput {
-  value: Float! @floatConstraint(min: 0.0)
-  currency: Currency!
-  unit: PriceUnit!
-  period: PricePeriod!
+value: Float! @floatConstraint(min: 0.0)
+currency: Currency!
+unit: PriceUnit!
+period: PricePeriod!
 }
 
 input ProjectInput {
-  tba: Int
+tba: Int
 }
 
 input RentInput {
-  restriction: [Restriction!]!
+restriction: [Restriction!]!
 }
 
-input SetBrokerProfileDetailsInput {
-  parentId: ID!
-  name: String!
-}
-
-input SetCompanyProfileDetailsInput {
-  parentId: ID!
-  name: String!
-}
-
-input SetOfficeProfileDetailsInput {
-  parentId: ID!
-  name: String!
+input SellerInput @objectConstraint(exactlyOne: ["broker","office"]) {
+customId: String = null @stringConstraint(minLength: 1, maxLength: 50)
+broker: BrokerInput = null
+office: OfficeInput = null
 }
 
 input TransferInput {
-  withCompany: Boolean!
+withCompany: Boolean!
 }
 
 """
@@ -1301,681 +1350,698 @@ scalar Void
 Rozostření adresy
 """
 enum AddressBlur {
-  "Žádné - zobrazit přesnou adresu"
-  NONE
+"Žádné - zobrazit přesnou adresu"
+NONE
 
-  "Ulice - zobrazit jméno ulice bez blížšího upřesnění"
-  STREET
+"Ulice - zobrazit jméno ulice bez blížšího upřesnění"
+STREET
 
-  "Čtvrť - zobrazit jméno městské části"
-  CITY_PART
+"Čtvrť - zobrazit jméno městské části"
+CITY_PART
 
-  "Obec - zobrazit jméno obce"
-  CITY
+"Obec - zobrazit jméno obce"
+CITY
 }
 
 """
 Vybavení nemovitosti
 """
 enum Amenity {
-  DISHWASHER
+DISHWASHER
 }
 
 """
 Speciální kvalifikace bytu
 """
 enum ApartmentSpecialType {
-  "Mezonet"
-  MAISONETTE
+"Mezonet"
+MAISONETTE
 
-  "Loft"
-  LOFT
+"Loft"
+LOFT
 
-  "Podkrovní"
-  ATTIC
+"Podkrovní"
+ATTIC
 }
 
 """
 Typ bytu
 """
 enum ApartmentType {
-  "1+kk"
-  APAR_1KK
+"1+kk"
+APAR_1KK
 
-  "1+1"
-  APAR_11
+"1+1"
+APAR_11
 
-  "2+kk"
-  APAR_2KK
+"2+kk"
+APAR_2KK
 
-  "2+1"
-  APAR_21
+"2+1"
+APAR_21
 
-  "3+kk"
-  APAR_3KK
+"3+kk"
+APAR_3KK
 
-  "3+1"
-  APAR_31
+"3+1"
+APAR_31
 
-  "4+kk"
-  APAR_4KK
+"4+kk"
+APAR_4KK
 
-  "4+1"
-  APAR_41
+"4+1"
+APAR_41
 
-  "5+kk"
-  APAR_5KK
+"5+kk"
+APAR_5KK
 
-  "5+1"
-  APAR_51
+"5+1"
+APAR_51
 
-  "6 a více"
-  APAR_6
+"6 a více"
+APAR_6
 
-  "Pokoj"
-  APAR_ROOM
+"Pokoj"
+APAR_ROOM
 
-  "Jiné"
-  OTHER
+"Jiné"
+OTHER
 }
 
 """
 Možnosti omezení v přístupu k resource.
 """
 enum AuthLevel {
-  """
-  Veřejný záznam
-  - Seller je vždy veřejný.
-  - Listing musí být ve stavu ACTIVE.
-  - Figure musí náležet k Listing/Seller je splňuje PUBLIC.
-  """
-  PUBLIC
+"""
+Veřejný záznam
+- Seller je vždy veřejný.
+- Listing musí být ve stavu ACTIVE.
+- Figure musí náležet k Listing/Seller je splňuje PUBLIC.
+"""
+PUBLIC
 
-  """
-  Spolupracovník ve firmě
-  - Seller musí náležet do stejné firmy jako jeden ze sellerů registrovaných k aktuálnímu uživateli.
-  - Listing musí patřit Seller co splnuje COWORKER.
-  - Figure musí náležet k Listing/Seller co splňuje COWORKER.
-  """
-  COWORKER
+"""
+Spolupracovník ve firmě
+- Seller musí náležet do stejné firmy jako jeden ze sellerů registrovaných k aktuálnímu uživateli.
+- Listing musí patřit Seller co splnuje COWORKER.
+- Figure musí náležet k Listing/Seller co splňuje COWORKER.
+"""
+COWORKER
 
-  """
-  Vlastník
-  - Seller musí být jeden ze sellerů registrovaných k aktuálnímu uživateli.
-  - Listing musí patřit Seller co splnuje OWNER.
-  - Figure musí náležet k Listing/Seller co splňuje OWNER.
-  """
-  OWNER
+"""
+Vlastník
+- Seller musí být jeden ze sellerů registrovaných k aktuálnímu uživateli.
+- Listing musí patřit Seller co splnuje OWNER.
+- Figure musí náležet k Listing/Seller co splňuje OWNER.
+"""
+OWNER
 
-  """
-  Nadřízený
-  - Seller musí být podřízený jednoho ze sellerů registrovaných k aktuálnímu uživateli.
-  - Listing musí patřit Seller co splnuje SUPERVISOR.
-  - Figure musí náležet k Listing/Seller co splňuje SUPERVISOR.
-  """
-  SUPERVISOR
+"""
+Nadřízený
+- Seller musí být podřízený jednoho ze sellerů registrovaných k aktuálnímu uživateli.
+- Listing musí patřit Seller co splnuje SUPERVISOR.
+- Figure musí náležet k Listing/Seller co splňuje SUPERVISOR.
+"""
+SUPERVISOR
 }
 
 """
 Typ komerčního prostoru
 """
 enum CommercialType {
-  "Kanceláře"
-  COMM_OFFICE
+"Kanceláře"
+COMM_OFFICE
 
-  "Virtuální kanceláře"
-  COMM_VIRTUAL_OFFICE
+"Virtuální kanceláře"
+COMM_VIRTUAL_OFFICE
 
-  "Sklady"
-  COMM_WAREHOUSE
+"Sklady"
+COMM_WAREHOUSE
 
-  "Výroba"
-  COMM_PRODUCTION
+"Výroba"
+COMM_PRODUCTION
 
-  "Obchodní prostory"
-  COMM_STORE
+"Obchodní prostory"
+COMM_STORE
 
-  "Ubytování"
-  COMM_ACCOMMODATION
+"Ubytování"
+COMM_ACCOMMODATION
 
-  "Restaurace"
-  COMM_CATERING
+"Restaurace"
+COMM_CATERING
 
-  "Zemědělské prostory"
-  COMM_AGRICULTURAL
+"Zemědělské prostory"
+COMM_AGRICULTURAL
 
-  "Činžovní dům"
-  COMM_APARTMENTS
+"Činžovní dům"
+COMM_APARTMENTS
 
-  "Jiné"
-  OTHER
+"Jiné"
+OTHER
 }
 
 """
 Stav budovy
 """
 enum Condition {
-  NEW
-  EXCELLENT
-  GOOD
-  BAD
-  CONSTRUCTION
-  DEMOLITION
-  BEFORE_RECONSTRUCTION
-  RECONSTRUCTED
+NEW
+EXCELLENT
+GOOD
+BAD
+CONSTRUCTION
+DEMOLITION
+BEFORE_RECONSTRUCTION
+RECONSTRUCTED
 }
 
 """
 Telekomunikační sítě
 """
 enum Connectivity {
-  INTERNET_OPTICAL
-  INTERNET_DSL
-  INTERNET_LTE
-  TELEVISION_ANTENNA
-  TELEVISION_SATELLITE
-  TELEVISION_CABLE
-  TELEVISION_IPTV
-  TELEPHONE
+INTERNET_OPTICAL
+INTERNET_DSL
+INTERNET_LTE
+TELEVISION_ANTENNA
+TELEVISION_SATELLITE
+TELEVISION_CABLE
+TELEVISION_IPTV
+TELEPHONE
 }
 
 """
 Státy
 """
 enum Country {
-  CZECHIA
+CZECHIA
 }
 
 """
 Měna
 """
 enum Currency {
-  "Koruna česká"
-  CZK
+"Koruna česká"
+CZK
 
-  "Euro"
-  EUR
+"Euro"
+EUR
 
-  "Americký dolar"
-  USD
+"Americký dolar"
+USD
 
-  "Ruský rubl"
-  RUB
+"Ruský rubl"
+RUB
 }
 
 """
 Elekřina
 """
 enum Electricity {
-  V120
-  V230
-  V400
+V120
+V230
+V400
 }
 
 """
 Energetická vyhláška
 """
 enum EnergyCertificate {
-  "č. 148/2007 Sb."
-  V147_2007
+"č. 148/2007 Sb."
+V147_2007
 
-  "č. 78/2013 Sb."
-  V78_2013
+"č. 78/2013 Sb."
+V78_2013
 
-  "č. 264/2020 Sb."
-  V264_2020
+"č. 264/2020 Sb."
+V264_2020
 }
 
 """
 Energetická náročnost
 """
 enum EnergyEfficiency {
-  "Mimořádně úsporná"
-  A
+"Mimořádně úsporná"
+A
 
-  "Velmi úsporná"
-  B
+"Velmi úsporná"
+B
 
-  "Úsporná"
-  C
+"Úsporná"
+C
 
-  "Méně úsporná"
-  D
+"Méně úsporná"
+D
 
-  "Nehospodárná"
-  E
+"Nehospodárná"
+E
 
-  "Velmi nehospodárná"
-  F
+"Velmi nehospodárná"
+F
 
-  "Mimořádně nehospodárná"
-  G
+"Mimořádně nehospodárná"
+G
 }
 
 """
 Kategorie nemovitosti
 """
 enum EstateType {
-  "Byt"
-  APARTMENT
+"Byt"
+APARTMENT
 
-  "Dům"
-  HOUSE
+"Dům"
+HOUSE
 
-  "Komerční prostor"
-  COMMERCIAL
+"Komerční prostor"
+COMMERCIAL
 
-  "Pozemek"
-  LAND
+"Pozemek"
+LAND
 
-  "Garáž a ostatní"
-  GARAGE
+"Garáž a ostatní"
+GARAGE
 }
 
 """
 Typ ostatních nemovitostí
 """
 enum GarageType {
-  "Garáž"
-  GARAGE_GARAGE
+"Garáž"
+GARAGE_GARAGE
 
-  "Garážové stání"
-  GARAGE_PARKING
+"Garážové stání"
+GARAGE_PARKING
 
-  "Mobilheim"
-  GARAGE_MOBILHEIM
+"Mobilheim"
+GARAGE_MOBILHEIM
 
-  "Půdní prostor"
-  GARAGE_ATTIC
+"Půdní prostor"
+GARAGE_ATTIC
 
-  "Vinný sklep"
-  GARAGE_WINE
+"Vinný sklep"
+GARAGE_WINE
 
-  "Jiné"
-  OTHER
+"Jiné"
+OTHER
 }
 
 """
 Plyn
 """
 enum Gas {
-  PIPELINE
-  INDIVIDUAL
+PIPELINE
+INDIVIDUAL
 }
 
 """
 Vytápění
 """
 enum Heating {
-  INDIVIDUAL_GAS
-  INDIVIDUAL_SOLID
-  INDIVIDUAL_ELECTRIC
-  CENTRAL_GAS
-  CENTRAL_SOLID
-  CENTRAL_ELECTRIC
-  CENTRAL_REMOTE
-  OTHER
+INDIVIDUAL_GAS
+INDIVIDUAL_SOLID
+INDIVIDUAL_ELECTRIC
+CENTRAL_GAS
+CENTRAL_SOLID
+CENTRAL_ELECTRIC
+CENTRAL_REMOTE
+OTHER
 }
 
 """
 Typ domu
 """
 enum HouseType {
-  "Rodinný dům"
-  HOUSE_FAMILY
+"Rodinný dům"
+HOUSE_FAMILY
 
-  "Vila"
-  HOUSE_FAIRY
+"Vila"
+HOUSE_FAIRY
 
-  "Chata"
-  HOUSE_HUT
+"Chata"
+HOUSE_HUT
 
-  "Chalupa"
-  HOUSE_COTTAGE
+"Chalupa"
+HOUSE_COTTAGE
 
-  "Zemědělská usedlost"
-  HOUSE_FARMLAND
+"Zemědělská usedlost"
+HOUSE_FARMLAND
 
-  "Dům na klíč"
-  HOUSE_TURNKEY
+"Dům na klíč"
+HOUSE_TURNKEY
 
-  "Jiné"
-  OTHER
+"Jiné"
+OTHER
 }
 
 """
 Typ pozemku
 """
 enum LandType {
-  "Bydlení"
-  LAND_HOUSING
+"Bydlení"
+LAND_HOUSING
 
-  "Komerční"
-  LAND_COMMERCIAL
+"Komerční"
+LAND_COMMERCIAL
 
-  "Pole"
-  LAND_FIELD
+"Pole"
+LAND_FIELD
 
-  "Louky"
-  LAND_MEADOW
+"Louky"
+LAND_MEADOW
 
-  "Lesy"
-  LAND_FOREST
+"Lesy"
+LAND_FOREST
 
-  "Rybníky"
-  LAND_POND
+"Rybníky"
+LAND_POND
 
-  "Sady nebo vinice"
-  LAND_ORCHARD
+"Sady nebo vinice"
+LAND_ORCHARD
 
-  "Zahrady"
-  LAND_GARDEN
+"Zahrady"
+LAND_GARDEN
 
-  "Jiné"
-  OTHER
+"Jiné"
+OTHER
 }
 
 """
 Jazyk
 """
 enum Language {
-  "Čeština"
-  CS
+"Čeština"
+CS
 
-  "Angličtina"
-  EN
+"Angličtina"
+EN
 
-  "Ruština"
-  RU
+"Ruština"
+RU
 
-  "Němčina"
-  DE
+"Němčina"
+DE
+}
+
+"""
+Zákonná ochrana
+"""
+enum LawProtection {
+"Žádná"
+NONE
+
+"Ochrané pásmo"
+RESTRICTED_AREA
+
+"Chráněná krajiná oblast"
+LANDSCAPE_AREA
+
+"Národní park"
+NATIONAL_PARK
 }
 
 """
 Způsob řazení nabídek
 """
 enum ListingSort {
-  "Doporučené řazení"
-  RELEVANCE
+"Doporučené řazení"
+RELEVANCE
 
-  "Od nejnovějšího"
-  NEWEST
+"Od nejnovějšího"
+NEWEST
 
-  "Od nejlevnějšího"
-  CHEAPEST
+"Od nejlevnějšího"
+CHEAPEST
 
-  "Od nejdražšího"
-  MOST_EXPENSIVE
+"Od nejdražšího"
+MOST_EXPENSIVE
 }
 
 """
 Stav nabídky
 """
 enum ListingState {
-  "V přípravě"
-  DRAFT
+"V přípravě"
+DRAFT
 
-  "Publikovaná"
-  ACTIVE
+"Publikovaná"
+ACTIVE
 
-  "Dokončená"
-  FINISHED
+"Dokončená"
+FINISHED
 
-  "Zrušená"
-  CANCELLED
+"Zrušená"
+CANCELLED
 }
 
 """
 Typ nabídky
 """
 enum ListingType {
-  "Standardní nabídka"
-  OFFER
+"Standardní nabídka"
+OFFER
 
-  "Aukce"
-  AUCTION
+"Aukce"
+AUCTION
 
-  "Developerský projekt"
-  PROJECT
+"Developerský projekt"
+PROJECT
 }
 
 """
 Materiál
 """
 enum Material {
-  WOOD
-  BRICK
-  STONE
-  PANEL
-  MOUNTED
-  SKELETAL
-  MIXED
-}
-
-"""
-Zákonná ochrana
-"""
-enum NatureProtection {
-  "Žádná"
-  NONE
-
-  "Ochrané pásmo"
-  RESTRICTED_AREA
-
-  "Chráněná krajiná oblast"
-  LANDSCAPE_AREA
-
-  "Národní park"
-  NATIONAL_PARK
+WOOD
+BRICK
+STONE
+PANEL
+MOUNTED
+SKELETAL
+MIXED
 }
 
 """
 Umístění budovy
 """
 enum Placement {
-  "V bloku"
-  BLOCK
+"V bloku"
+BLOCK
 
-  "Samostatný"
-  STANDALONE
+"Samostatný"
+STANDALONE
 }
 
 """
 Speciální umístění
 """
 enum PlacementSpecial {
-  "Řadový"
-  TERRACED
+"Řadový"
+TERRACED
 
-  "Rohový"
-  CORNER
+"Rohový"
+CORNER
 }
 
 """
 Perioda ceny
 """
 enum PricePeriod {
-  "Žádná (při prodeji)"
-  NONE
+"Žádná (při prodeji)"
+NONE
 
-  "Za rok"
-  YEAR
+"Za rok"
+YEAR
 
-  "Za měsíc"
-  MONTH
+"Za měsíc"
+MONTH
 
-  "Za den"
-  DAY
+"Za den"
+DAY
 
-  "Za hodinu"
-  HOUR
+"Za hodinu"
+HOUR
 }
 
 """
 Jednotky ceny
 """
 enum PriceUnit {
-  "Za nemovitost"
-  PROPERTY
+"Za nemovitost"
+PROPERTY
 
-  "Za metr čtvereční"
-  M2
+"Za metr čtvereční"
+M2
 }
 
 """
 Omezení v užívání nemovitosti
 """
 enum Restriction {
-  "Domácí mazlíčci"
-  ANIMALS
+"Domácí mazlíčci"
+ANIMALS
 
-  "Kouření"
-  SMOKING
+"Kouření"
+SMOKING
 }
 
 """
 Přístupová cesta
 """
 enum Road {
-  "Asfaltová"
-  ASPHALT
+"Asfaltová"
+ASPHALT
 
-  "Betonová"
-  CONCRETE
+"Betonová"
+CONCRETE
 
-  "Dlážděná"
-  PAVEMENT
+"Dlážděná"
+PAVEMENT
 
-  "Neupravená"
-  UNTREATED
+"Neupravená"
+UNTREATED
+}
+
+"""
+Typ prodávajícího
+"""
+enum SellerType {
+"Firma"
+COMPANY
+
+"Kancelář"
+OFFICE
+
+"Makléř"
+BROKER
+
+"Fyzická osoba"
+INDIVIDUAL
 }
 
 """
 Typ služby
 """
 enum ServiceType {
-  "Pronájem"
-  RENT
+"Pronájem"
+RENT
 
-  "Koupě a prodej"
-  TRANSFER
+"Koupě a prodej"
+TRANSFER
 }
 
 """
 Rozložení figur na slajdu
 """
 enum SlideLayout {
-  LEFT
-  RIGHT
-  EVEN
+LEFT
+RIGHT
+EVEN
 }
 
 """
 Typ slajdu
 """
 enum SlideType {
-  SINGLE
-  DOUBLE
-  TRIPLE
+SINGLE
+DOUBLE
+TRIPLE
 }
 
 """
 Odpad
 """
 enum Waste {
-  SEWERAGE
-  PLANT
-  SEPTIC
-  SUMP
+SEWERAGE
+PLANT
+SEPTIC
+SUMP
 }
 
 """
 Voda
 """
 enum Water {
-  PIPELINE
-  INDIVIDUAL
+PIPELINE
+INDIVIDUAL
 }
 
 """
 Uživatel musí naplňovat určitou úroveň přístupu.
 """
 directive @auth(
-  level: [AuthLevel!]!
+level: [AuthLevel!]!
 ) on FIELD_DEFINITION | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Graphpinator booleanWhere directive.
 """
 directive @booleanWhere(
-  field: String
-  not: Boolean! = false
-  equals: Boolean
-  orNull: Boolean! = false
+field: String
+not: Boolean! = false
+equals: Boolean
+orNull: Boolean! = false
 ) repeatable on FIELD | INLINE_FRAGMENT | FRAGMENT_SPREAD
 
 """
 Graphpinator floatConstraint directive.
 """
 directive @floatConstraint(
-  min: Float
-  max: Float
-  oneOf: [Float!] @listConstraint(minItems: 1)
+min: Float
+max: Float
+oneOf: [Float!] @listConstraint(minItems: 1)
 ) on FIELD_DEFINITION | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Graphpinator floatWhere directive.
 """
 directive @floatWhere(
-  field: String
-  not: Boolean! = false
-  equals: Float
-  greaterThan: Float
-  lessThan: Float
-  orNull: Boolean! = false
+field: String
+not: Boolean! = false
+equals: Float
+greaterThan: Float
+lessThan: Float
+orNull: Boolean! = false
 ) repeatable on FIELD | INLINE_FRAGMENT | FRAGMENT_SPREAD
 
 """
 Graphpinator intConstraint directive.
 """
 directive @intConstraint(
-  min: Int
-  max: Int
-  oneOf: [Int!] @listConstraint(minItems: 1)
+min: Int
+max: Int
+oneOf: [Int!] @listConstraint(minItems: 1)
 ) on FIELD_DEFINITION | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Graphpinator intWhere directive.
 """
 directive @intWhere(
-  field: String
-  not: Boolean! = false
-  equals: Int
-  greaterThan: Int
-  lessThan: Int
-  orNull: Boolean! = false
+field: String
+not: Boolean! = false
+equals: Int
+greaterThan: Int
+lessThan: Int
+orNull: Boolean! = false
 ) repeatable on FIELD | INLINE_FRAGMENT | FRAGMENT_SPREAD
 
 """
 Graphpinator listConstraint directive.
 """
 directive @listConstraint(
-  minItems: Int @intConstraint(min: 0)
-  maxItems: Int @intConstraint(min: 0)
-  unique: Boolean! = false
-  innerList: ListConstraintInput
+minItems: Int @intConstraint(min: 0)
+maxItems: Int @intConstraint(min: 0)
+unique: Boolean! = false
+innerList: ListConstraintInput
 ) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION | FIELD_DEFINITION
 
 """
 Graphpinator listWhere directive.
 """
 directive @listWhere(
-  field: String
-  not: Boolean! = false
-  minItems: Int @intConstraint(min: 0)
-  maxItems: Int @intConstraint(min: 0)
-  orNull: Boolean! = false
+field: String
+not: Boolean! = false
+minItems: Int @intConstraint(min: 0)
+maxItems: Int @intConstraint(min: 0)
+orNull: Boolean! = false
 ) repeatable on FIELD | INLINE_FRAGMENT | FRAGMENT_SPREAD
 
 """
@@ -1984,40 +2050,51 @@ Uživatel musí být přihlášený.
 directive @loggedIn on FIELD_DEFINITION
 
 """
+Field guarantees it wont return null when the condition is met.
+"""
+directive @notNullForArg(
+"Jméno argumentu"
+name: String!
+
+"Hodnota argumentu."
+equals: String
+) on FIELD_DEFINITION
+
+"""
 Graphpinator objectConstraint directive.
 """
 directive @objectConstraint(
-  atLeastOne: [String!] @listConstraint(minItems: 1)
-  exactlyOne: [String!] @listConstraint(minItems: 1)
+atLeastOne: [String!] @listConstraint(minItems: 1)
+exactlyOne: [String!] @listConstraint(minItems: 1)
 ) repeatable on OBJECT | INTERFACE | INPUT_OBJECT
 
 """
 Defines what type of global IDs are accepted for a mutation argument of type ID.
 """
 directive @possibleTypes(
-  abstractType: String
-  concreteTypes: [String!]!
+abstractType: String
+concreteTypes: [String!]!
 ) on ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Graphpinator stringConstraint directive.
 """
 directive @stringConstraint(
-  minLength: Int @intConstraint(min: 0)
-  maxLength: Int @intConstraint(min: 0)
-  regex: String
-  oneOf: [String!] @listConstraint(minItems: 1)
+minLength: Int @intConstraint(min: 0)
+maxLength: Int @intConstraint(min: 0)
+regex: String
+oneOf: [String!] @listConstraint(minItems: 1)
 ) on FIELD_DEFINITION | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
 
 """
 Graphpinator stringWhere directive.
 """
 directive @stringWhere(
-  field: String
-  not: Boolean! = false
-  equals: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  orNull: Boolean! = false
+field: String
+not: Boolean! = false
+equals: String
+contains: String
+startsWith: String
+endsWith: String
+orNull: Boolean! = false
 ) repeatable on FIELD | INLINE_FRAGMENT | FRAGMENT_SPREAD

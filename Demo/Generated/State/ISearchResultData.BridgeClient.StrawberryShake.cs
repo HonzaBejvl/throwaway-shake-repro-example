@@ -4,7 +4,7 @@
 namespace Logic.Graphql.Generated.State
 {
     ///<summary>Aukce - nabídka typu aukce</summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial interface ISearchResultData
     {
         global::System.String __typename { get; }

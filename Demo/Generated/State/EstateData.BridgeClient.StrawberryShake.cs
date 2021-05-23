@@ -4,50 +4,17 @@
 namespace Logic.Graphql.Generated.State
 {
     ///<summary>Nemovitost - popis nemovitosti</summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class EstateData
     {
-        public EstateData(global::System.String __typename, global::Logic.Graphql.Generated.EstateType? type = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Electricity>? electricity = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Gas>? gas = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Water>? water = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Heating>? heating = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Waste>? waste = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Road>? road = default !, global::Logic.Graphql.Generated.NatureProtection? natureProtection = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Connectivity>? connectivity = default !, global::Logic.Graphql.Generated.State.IEstateTypeInfoData? typeInfo = default !, global::Logic.Graphql.Generated.State.AddressListingData? address = default !, global::Logic.Graphql.Generated.State.AddressData? fullAddress = default !)
+        public EstateData(global::System.String __typename, global::Logic.Graphql.Generated.State.IEstateTypeInfoData? typeInfo = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Type = type;
-            Electricity = electricity;
-            Gas = gas;
-            Water = water;
-            Heating = heating;
-            Waste = waste;
-            Road = road;
-            NatureProtection = natureProtection;
-            Connectivity = connectivity;
             TypeInfo = typeInfo;
-            Address = address;
-            FullAddress = fullAddress;
         }
 
         public global::System.String __typename { get; }
 
-        public global::Logic.Graphql.Generated.EstateType? Type { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Electricity>? Electricity { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Gas>? Gas { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Water>? Water { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Heating>? Heating { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Waste>? Waste { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Road>? Road { get; }
-
-        public global::Logic.Graphql.Generated.NatureProtection? NatureProtection { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Connectivity>? Connectivity { get; }
-
         public global::Logic.Graphql.Generated.State.IEstateTypeInfoData? TypeInfo { get; }
-
-        public global::Logic.Graphql.Generated.State.AddressListingData? Address { get; }
-
-        public global::Logic.Graphql.Generated.State.AddressData? FullAddress { get; }
     }
 }

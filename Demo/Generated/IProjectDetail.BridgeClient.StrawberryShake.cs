@@ -3,13 +3,9 @@
 
 namespace Logic.Graphql.Generated
 {
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public interface IProjectDetail
     {
-        public global::Logic.Graphql.Generated.IGetDetail_Listing_Seller_2 Seller { get; }
-
-        public global::System.Int32 ListingCount { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.IGetDetail_Listing_Listings> Listings { get; }
+        public global::Logic.Graphql.Generated.IGetDetail_Listing_Listings Listings { get; }
     }
 }

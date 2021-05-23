@@ -6,27 +6,8 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Nemovitost - popis nemovitosti
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public interface IEstate : IHasEstateTypeInfo
     {
-        public global::Logic.Graphql.Generated.EstateType Type { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Electricity> Electricity { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Gas> Gas { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Water> Water { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Heating> Heating { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Waste> Waste { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Road> Road { get; }
-
-        public global::Logic.Graphql.Generated.NatureProtection NatureProtection { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Connectivity> Connectivity { get; }
-
-        public global::Logic.Graphql.Generated.IGetListingCards_Listings_Items_Estate_Address Address { get; }
     }
 }

@@ -6,7 +6,7 @@ namespace Logic.Graphql.Generated
     /// <summary>
     /// Doplnující informace pro garáže a ostatní nemovitosti
     /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public interface IGarageInfo
     {
         public global::Logic.Graphql.Generated.GarageType GarageType { get; }

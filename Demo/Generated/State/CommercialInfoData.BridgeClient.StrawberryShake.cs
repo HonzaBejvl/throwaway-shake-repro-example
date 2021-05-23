@@ -4,80 +4,14 @@
 namespace Logic.Graphql.Generated.State
 {
     ///<summary>Doplnující informace pro komerční prostory</summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "11.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "12.0.0.0")]
     public partial class CommercialInfoData : IEstateTypeInfoData
     {
-        public CommercialInfoData(global::System.String __typename, global::Logic.Graphql.Generated.CommercialType? commercialType = default !, global::Logic.Graphql.Generated.EnergyEfficiency? energyEfficiency = default !, global::Logic.Graphql.Generated.EnergyCertificate? energyCertificate = default !, global::Logic.Graphql.Generated.Condition? condition = default !, global::Logic.Graphql.Generated.Material? material = default !, global::Logic.Graphql.Generated.Placement? placement = default !, global::System.Int32? roomCount = default !, global::System.Double? ceilingHeight = default !, global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Amenity>? amenities = default !, global::System.Double? usableArea = default !, global::System.Double? balconyArea = default !, global::System.Double? terraceArea = default !, global::System.Double? loggiaArea = default !, global::System.Double? cellarArea = default !, global::System.Double? poolArea = default !, global::System.Int32? constructionYear = default !, global::System.Int32? acceptanceYear = default !, global::System.Int32? reconstructionYear = default !, global::System.Double? storeArea = default !, global::System.Double? officeArea = default !, global::System.Double? warehouseArea = default !, global::System.Double? productionArea = default !)
+        public CommercialInfoData(global::System.String __typename)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            CommercialType = commercialType;
-            EnergyEfficiency = energyEfficiency;
-            EnergyCertificate = energyCertificate;
-            Condition = condition;
-            Material = material;
-            Placement = placement;
-            RoomCount = roomCount;
-            CeilingHeight = ceilingHeight;
-            Amenities = amenities;
-            UsableArea = usableArea;
-            BalconyArea = balconyArea;
-            TerraceArea = terraceArea;
-            LoggiaArea = loggiaArea;
-            CellarArea = cellarArea;
-            PoolArea = poolArea;
-            ConstructionYear = constructionYear;
-            AcceptanceYear = acceptanceYear;
-            ReconstructionYear = reconstructionYear;
-            StoreArea = storeArea;
-            OfficeArea = officeArea;
-            WarehouseArea = warehouseArea;
-            ProductionArea = productionArea;
         }
 
         public global::System.String __typename { get; }
-
-        public global::Logic.Graphql.Generated.CommercialType? CommercialType { get; }
-
-        public global::Logic.Graphql.Generated.EnergyEfficiency? EnergyEfficiency { get; }
-
-        public global::Logic.Graphql.Generated.EnergyCertificate? EnergyCertificate { get; }
-
-        public global::Logic.Graphql.Generated.Condition? Condition { get; }
-
-        public global::Logic.Graphql.Generated.Material? Material { get; }
-
-        public global::Logic.Graphql.Generated.Placement? Placement { get; }
-
-        public global::System.Int32? RoomCount { get; }
-
-        public global::System.Double? CeilingHeight { get; }
-
-        public global::System.Collections.Generic.IReadOnlyList<global::Logic.Graphql.Generated.Amenity>? Amenities { get; }
-
-        public global::System.Double? UsableArea { get; }
-
-        public global::System.Double? BalconyArea { get; }
-
-        public global::System.Double? TerraceArea { get; }
-
-        public global::System.Double? LoggiaArea { get; }
-
-        public global::System.Double? CellarArea { get; }
-
-        public global::System.Double? PoolArea { get; }
-
-        public global::System.Int32? ConstructionYear { get; }
-
-        public global::System.Int32? AcceptanceYear { get; }
-
-        public global::System.Int32? ReconstructionYear { get; }
-
-        public global::System.Double? StoreArea { get; }
-
-        public global::System.Double? OfficeArea { get; }
-
-        public global::System.Double? WarehouseArea { get; }
-
-        public global::System.Double? ProductionArea { get; }
     }
 }
